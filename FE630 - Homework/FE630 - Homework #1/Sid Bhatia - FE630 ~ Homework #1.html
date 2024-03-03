@@ -7518,7 +7518,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="1.-Log-Utility">1. Log Utility<a class="anchor-link" href="#1.-Log-Utility">¶</a></h5>
+<h5 id="1.-Log-Utility-(15-pts)">1. Log Utility (15 pts)<a class="anchor-link" href="#1.-Log-Utility-(15-pts)">¶</a></h5>
 </div>
 </div>
 </div>
@@ -7859,6 +7859,275 @@ Taylor Series Expected Utility Approximation: 6.9243
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>With the updated game conditions, the risk premium now is approximately $\bf{\$46.06}$. This indicates a significant increase in the risk premium compared to the previous scenarios.</p>
 <p>This increase reflects the heightened sensitivity of the investor's risk aversion to the increased volatility of the game. With both potential gains and losses being larger and equally probable, the gamble is perceived as <strong>riskier</strong>, leading to a <strong>higher risk premium</strong>. The investor would require a larger compensation (in terms of a risk premium) to be willing to participate in this more volatile game.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="2.-Certainty-Equivalent-and-Risk-Premium-for-a-Power-Utility-(30-pts)">2. Certainty Equivalent and Risk Premium for a Power Utility (30 pts)<a class="anchor-link" href="#2.-Certainty-Equivalent-and-Risk-Premium-for-a-Power-Utility-(30-pts)">¶</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>An investor whose initial wealth is $\$1000$ is offered an opportunity to play a gamble with 2 possible outcomes: winning $\$250$ with a probability of $2/3$ or losing $\$400$ with a probability of $1/3$. The investor utility function is given by $u(W) = W^k$, where $k \in \mathbb{R}$.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>a. <strong>Absolute Risk Aversion &amp; Risk Attitude</strong></p>
+<p>Compute the absolute risk aversion coefficient and describe the risk attitude of the investor (Risk-averse or Risk-taker) as a function of $k$. Justify your answer.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>First, let's define <strong>absolute risk aversion</strong> (<strong>ARA</strong>) and explain how it relates to the utility function's shape as well as the parameter $k$.</p>
+<p>$$\text{ARA}(W) = -\frac{u''(W)}{u'(W)}$$</p>
+<p>Given the utility function $u(W) = W^k$, we can compute its <em>first</em> and <em>second derivatives</em> to find the <strong>absolute risk aversion coefficient</strong>:</p>
+<ul>
+<li>First derivative $u'(W) = k \cdot W^{k - 1}$</li>
+<li>Second derivative $u''(W) = k \cdot (k - 1) \cdot W^{k - 2}$</li>
+</ul>
+<p>Substituting these into the formula for absolute risk aversion, we get:</p>
+<p>$$\text{ARA}(W) = -\frac{k \cdot (k - 1) \cdot W^{k - 2}}{k \cdot W^{k - 1}} = -(k - 1) \cdot W^{-1} = -\frac{k - 1}{W} = \boldsymbol{\frac{1 - k}{W}}$$</p>
+<p>The sign and magnitude of the ARA coefficient depend on $k$ and $W$, which indicates the investor's risk attitude:</p>
+<ul>
+<li>If $k &lt; 1 , \text{ARA}(W) &gt; 0$, indicating <em>risk aversion</em> since the utility function is <strong>concave</strong>.</li>
+<li>If $k &gt; 1, \text{ARA}(W) &lt; 0$, indicating <em>risk seeking</em> since the utility function is <strong>convex</strong>.</li>
+<li>If $k = 1, \text{ARA}(W) = 0$, indicating <em>risk neutrality</em> since the utility function is <strong>linear</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_ARA_and_risk_attitude</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">W</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Computes the Absolute Risk Aversion (ARA) coefficient for a given k and W,</span>
+<span class="sd">    and describes the investor's risk attitude.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - k: The exponent in the utility function u(W) = W^k.</span>
+<span class="sd">    - W: Wealth, with a default value of 1000.</span>
+<span class="sd">    """</span>
+    <span class="c1"># First derivative of the utility function</span>
+    <span class="n">u_prime</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">W</span><span class="o">**</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Second derivative of the utility function</span>
+    <span class="n">u_double_prime</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">W</span><span class="o">**</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    
+    <span class="c1"># Absolute Risk Aversion (ARA) coefficient</span>
+    <span class="n">ARA</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">u_double_prime</span> <span class="o">/</span> <span class="n">u_prime</span><span class="p">)</span>
+    
+    <span class="c1"># Determine risk attitude based on k</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">risk_attitude</span> <span class="o">=</span> <span class="s2">"Risk-averse"</span>
+    <span class="k">elif</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">risk_attitude</span> <span class="o">=</span> <span class="s2">"Risk-taker"</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># k == 1</span>
+        <span class="n">risk_attitude</span> <span class="o">=</span> <span class="s2">"Risk-neutral"</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"For k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">, the Absolute Risk Aversion (ARA) coefficient is </span><span class="si">{</span><span class="n">ARA</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, indicating the investor is </span><span class="si">{</span><span class="n">risk_attitude</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">k_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]</span>  <span class="c1"># Example k values to illustrate different risk attitudes</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_values</span><span class="p">:</span>
+    <span class="n">compute_ARA_and_risk_attitude</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>For k = 0.5, the Absolute Risk Aversion (ARA) coefficient is 0.0005, indicating the investor is Risk-averse.
+For k = 1, the Absolute Risk Aversion (ARA) coefficient is -0.0000, indicating the investor is Risk-neutral.
+For k = 1.5, the Absolute Risk Aversion (ARA) coefficient is -0.0005, indicating the investor is Risk-taker.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol>
+<li><strong>Risk-averse</strong>:</li>
+</ol>
+<p>When $k &lt; 1$, the utility function $u(W) = W^k$ is <strong>concave</strong>. In this case, the investor exhibits <strong>diminishing marginal utility of wealth</strong>, meaning that the utility gained from each additional unit of wealth decreases as wealth increases. This concavity leads to a positive ARA coefficient, as the investor values a sure outcome more than an uncertain one with the same expected value. The positive ARA coefficient $(\text{ARA} &gt; 0)$ for $k &lt; 1$ indicates that the investor is risk-averse, preferring certainty to risk when faced with potential gains or losses.</p>
+<ol start="2">
+<li><strong>Risk-neutral</strong>:</li>
+</ol>
+<p>When $k = 1$, the utility function $u(W) = W^k = W$ is <strong>linear</strong>. This linearity implies <strong>constant marginal utility of wealth</strong>, where the investor values each additional unit of wealth equally, regardless of their current wealth level. A linear utility function results in an ARA coefficient of zero $(\text{ARA} = 0)$, indicating that the investor is risk-neutral. A risk-neutral investor is indifferent between a certain outcome and a gamble with the same expected return, showing no preference for or aversion to risk.</p>
+<ol start="3">
+<li><strong>Risk-taker (Risk-seeking)</strong>:</li>
+</ol>
+<p>When $k &gt; 1$, the utility function $u(W) = W^k$ is <strong>convex</strong>. This convexity reflects <strong>increasing marginal utility of wealth</strong>, meaning that the utility gained from each additional unit of wealth increases as wealth increases. Such a utility function leads to a negative ARA coefficient $(\text{ARA} &lt; 0)$, indicating that the investor is a risk-taker or risk-seeking. Risk-takers derive more utility from the possibility of higher gains associated with risk than from the certainty of a sure outcome, even when both options have the same expected return.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>b. $\boldsymbol{k = 1/2}$</p>
+<p>Assume that $k = 1/2$. What is the Certainty equivalent of this risky game? What is the exact risk premium of this risky game? How good is the approximation obtained by using a Taylor series expansion and absolute Risk-aversion coefficient?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Adjust the utility function for u(W) = W^k, with k=1/2</span>
+<span class="k">def</span> <span class="nf">utility</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">W</span><span class="o">**</span><span class="n">k</span>
+
+<span class="c1"># Adjusted expected utility calculation for the given gamble.</span>
+<span class="k">def</span> <span class="nf">expected_utility</span><span class="p">(</span><span class="n">W0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">W_win</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">W_lose</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">p_win</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">p_lose</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">p_win</span> <span class="o">*</span> <span class="n">utility</span><span class="p">(</span><span class="n">W0</span> <span class="o">+</span> <span class="n">W_win</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">p_lose</span> <span class="o">*</span> <span class="n">utility</span><span class="p">(</span><span class="n">W0</span> <span class="o">+</span> <span class="n">W_lose</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+<span class="c1"># Function to find the certainty equivalent remains the same.</span>
+<span class="k">def</span> <span class="nf">find_certainty_equivalent</span><span class="p">(</span><span class="n">EU</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">W0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">CE</span><span class="p">:</span> <span class="n">utility</span><span class="p">(</span><span class="n">W0</span> <span class="o">+</span> <span class="n">CE</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">-</span> <span class="n">EU</span>
+    <span class="n">CE</span><span class="p">,</span> <span class="o">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Initial guess for CE is 0.</span>
+    <span class="k">return</span> <span class="n">CE</span>
+
+<span class="c1"># Function to calculate the risk premium remains the same.</span>
+<span class="k">def</span> <span class="nf">calculate_risk_premium</span><span class="p">(</span><span class="n">E_W</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">W0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">CE</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">E_W</span> <span class="o">-</span> <span class="p">(</span><span class="n">W0</span> <span class="o">+</span> <span class="n">CE</span><span class="p">)</span>
+
+<span class="c1"># Calculate the first and second derivatives of the utility function at W0.</span>
+<span class="k">def</span> <span class="nf">u_prime</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the first derivative of the utility function."""</span>
+    <span class="k">return</span> <span class="n">k</span> <span class="o">*</span> <span class="n">W</span><span class="o">**</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">u_double_prime</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the second derivative of the utility function."""</span>
+    <span class="k">return</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">W</span><span class="o">**</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Compute the Taylor series expansion to approximate expected utility.</span>
+<span class="k">def</span> <span class="nf">taylor_series_approximation</span><span class="p">(</span><span class="n">W0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delta_W</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Approximate the expected utility using Taylor series expansion."""</span>
+    <span class="n">u_prime_W0</span> <span class="o">=</span> <span class="n">u_prime</span><span class="p">(</span><span class="n">W0</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">u_double_prime_W0</span> <span class="o">=</span> <span class="n">u_double_prime</span><span class="p">(</span><span class="n">W0</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">utility</span><span class="p">(</span><span class="n">W0</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">u_prime_W0</span> <span class="o">*</span> <span class="n">delta_W</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">u_double_prime_W0</span> <span class="o">*</span> <span class="p">(</span><span class="n">delta_W</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Given values for the new scenario.</span>
+<span class="n">W0</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Initial wealth</span>
+<span class="n">W_win</span> <span class="o">=</span> <span class="mi">250</span>  <span class="c1"># Winning amount</span>
+<span class="n">W_lose</span> <span class="o">=</span> <span class="o">-</span><span class="mi">400</span>  <span class="c1"># Losing amount</span>
+<span class="n">p_win</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span>  <span class="c1"># Probability of winning</span>
+<span class="n">p_lose</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span>  <span class="c1"># Probability of losing</span>
+
+<span class="c1"># Calculate expected utility of the gamble.</span>
+<span class="n">EU</span> <span class="o">=</span> <span class="n">expected_utility</span><span class="p">(</span><span class="n">W0</span><span class="p">,</span> <span class="n">W_win</span><span class="p">,</span> <span class="n">W_lose</span><span class="p">,</span> <span class="n">p_win</span><span class="p">,</span> <span class="n">p_lose</span><span class="p">)</span>
+
+<span class="c1"># Solve for the certainty equivalent.</span>
+<span class="n">CE</span> <span class="o">=</span> <span class="n">find_certainty_equivalent</span><span class="p">(</span><span class="n">EU</span><span class="p">,</span> <span class="n">W0</span><span class="p">)</span>
+
+<span class="c1"># Calculate expected wealth from the game.</span>
+<span class="n">E_W</span> <span class="o">=</span> <span class="n">W0</span> <span class="o">+</span> <span class="n">p_win</span> <span class="o">*</span> <span class="n">W_win</span> <span class="o">+</span> <span class="n">p_lose</span> <span class="o">*</span> <span class="n">W_lose</span>
+
+<span class="c1"># Calculate the risk premium.</span>
+<span class="n">RP</span> <span class="o">=</span> <span class="n">calculate_risk_premium</span><span class="p">(</span><span class="n">E_W</span><span class="p">,</span> <span class="n">W0</span><span class="p">,</span> <span class="n">CE</span><span class="p">)</span>
+
+<span class="c1"># Calculate the change in wealth for the gamble</span>
+<span class="n">delta_W</span> <span class="o">=</span> <span class="n">p_win</span> <span class="o">*</span> <span class="n">W_win</span> <span class="o">+</span> <span class="n">p_lose</span> <span class="o">*</span> <span class="n">W_lose</span>
+
+<span class="c1"># Calculate the Taylor series approximation of expected utility</span>
+<span class="n">EU_approx</span> <span class="o">=</span> <span class="n">taylor_series_approximation</span><span class="p">(</span><span class="n">W0</span><span class="p">,</span> <span class="n">delta_W</span><span class="p">)</span>
+
+<span class="c1"># Display results.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Certainty Equivalent: </span><span class="si">{</span><span class="n">CE</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Risk Premium: </span><span class="si">{</span><span class="n">RP</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected Utility: </span><span class="si">{</span><span class="n">EU</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Taylor Series Expected Utility Approximation: </span><span class="si">{</span><span class="n">EU_approx</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Certainty Equivalent: 7.12
+Risk Premium: 26.21
+Expected Utility: 31.7352
+Taylor Series Expected Utility Approximation: 32.1454
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol>
+<li><em>What is the Certainty Equivalent of this risky game?</em></li>
+</ol>
+<p>The Certainty Equivalent (CE) of the game is $\bf{\$7.12}$. This value represents the additional amount of money, over the initial wealth of $\$1000$, that the investor would consider equivalent in utility to participating in the risky game. In other words, the investor would be indifferent between receiving an assured $\$1007.12$ and playing the game with the potential to win $\$250$ or lose $\$400$ with given probabilities.</p>
+<ol start="2">
+<li><em>What is the exact Risk Premium of this risky game?</em></li>
+</ol>
+<p>The Risk Premium (RP) of the game is $\bf{\$26.21}$. The risk premium is the difference between the expected wealth from the game and the certainty equivalent, adjusted for the initial wealth. It quantifies the amount the investor would pay to avoid the risk, indicating the monetary value of the risk to the investor. In this case, it shows that the investor would be willing to forgo $\$26.21$ to avoid participating in the gamble, highlighting the investor's risk aversion.</p>
+<ol start="3">
+<li><em>How good is the approximation obtained by using a Taylor series expansion and absolute Risk-aversion coefficient?</em></li>
+</ol>
+<p>The approximation of the expected utility using the Taylor series expansion is <strong>32.1454</strong>, compared to the directly calculated expected utility of <strong>31.7352</strong>. The small discrepancy between the Taylor series approximation and the actual expected utility suggests that the approximation is <strong>quite good</strong>, especially considering the simplicity and the local nature of the Taylor series expansion around the initial wealth $W_0$.</p>
 </div>
 </div>
 </div>
