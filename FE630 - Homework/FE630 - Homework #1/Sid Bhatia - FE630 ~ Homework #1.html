@@ -7726,6 +7726,83 @@ Taylor Series Expected Utility Approximation: 6.9243
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>b. <strong>Sensitivity to Initial Wealth</strong></p>
+<p>Assume that the initial wealth is $\$2000$. What is the risk premium now?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">W0_new</span> <span class="o">=</span> <span class="mi">2000</span>
+
+<span class="c1"># Calculate expected utility of the gamble with new initial wealth.</span>
+<span class="n">EU_new</span> <span class="o">=</span> <span class="n">expected_utility</span><span class="p">(</span><span class="n">W0_new</span><span class="p">,</span> <span class="n">W_win</span><span class="p">,</span> <span class="n">W_lose</span><span class="p">,</span> <span class="n">p_win</span><span class="p">,</span> <span class="n">p_lose</span><span class="p">)</span>
+
+<span class="c1"># Solve for the certainty equivalent with new initial wealth.</span>
+<span class="n">CE_new</span> <span class="o">=</span> <span class="n">find_certainty_equivalent</span><span class="p">(</span><span class="n">EU_new</span><span class="p">,</span> <span class="n">W0_new</span><span class="p">)</span>
+
+<span class="c1"># Calculate expected wealth from the game with new initial wealth.</span>
+<span class="n">E_W_new</span> <span class="o">=</span> <span class="n">W0_new</span> <span class="o">+</span> <span class="n">p_win</span> <span class="o">*</span> <span class="n">W_win</span> <span class="o">+</span> <span class="n">p_lose</span> <span class="o">*</span> <span class="n">W_lose</span>
+
+<span class="c1"># Calculate the risk premium with the new initial wealth.</span>
+<span class="n">RP_new</span> <span class="o">=</span> <span class="n">calculate_risk_premium</span><span class="p">(</span><span class="n">E_W_new</span><span class="p">,</span> <span class="n">W0_new</span><span class="p">,</span> <span class="n">CE_new</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"New Risk Premium: </span><span class="si">{</span><span class="n">RP_new</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>New Risk Premium: 13.10
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Given the initial wealth increase to $\$2000$ and applying the previously defined Python code, the risk premium for this new scenario is approximately $\bf{\$13.10}$. This result indicates how sensitive the investor's risk aversion is to changes in initial wealth. With an initial wealth of $2000, the investor perceives the gamble to be less risky compared to when the initial wealth was $1000, hence the lower risk premium.</p>
+<p>This decrease in the risk premium with an increase in initial wealth can be attributed to the utility function's properties, which in this case is a logarithmic function. The logarithmic utility function exhibits <strong>diminishing marginal utility</strong>, meaning that as wealth increases, the utility gained from an additional dollar becomes less significant. Consequently, the investor's aversion to losing a certain amount of money diminishes as their wealth increases, leading to a lower risk premium for the gamble at higher levels of initial wealth.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>c. <strong>Sensitivity to Volatility</strong></p>
+<p>Assume that the initial wealth is $\$1000$ and the outcomes are winning $\$300$ with a probability of $1/2$ or losing $\$300$ with a probability of $1/2$. What is the risk premium now?</p>
+</div>
+</div>
+</div>
+</div>
 </main>
 </body>
 </html>
