@@ -8701,6 +8701,72 @@ META    0.090059  0.138189  0.123173  0.290097
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>a. <strong>Portfolio Variance</strong></p>
+<p>Give the expression of the Portfolio’s variance $\sigma^2_P(n)$ as a function of $\Sigma$ and $n$.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Given an equally weighted portfolio with $n$ securities, the weights vector $\omega$ is defined as $\omega = (\omega_1, \omega_2, \dots, \omega_n)^T$ where $\omega_i = \frac{1}{n}$ for each $i \in \{1, \dots, n\}$. The portfolio's variance $\sigma^2_P(n)$ can be expressed as a function of the variance-covariance matrix $\Sigma$ and the number of securities $n$.</p>
+<p>The portfolio's variance is given by the formula:</p>
+<p>$$\sigma^2_P(n) = \omega^T \Sigma \omega$$</p>
+<p>Substituting the equal weights $\omega_i = \frac{1}{n}$ into the equation, we get:</p>
+<p>$$\sigma^2_P(n) = \left(\frac{1}{n}\right)^2 \sum_{i=1}^{n}\sum_{j=1}^{n} \Sigma_{ij}$$</p>
+<p>Here, $\Sigma_{ij}$ is the covariance between the returns of security $i$ and security $j$. Since the portfolio is equally weighted, each weight $\omega_i$ is $\frac{1}{n}$, and the expression simplifies by factoring out the squared weights:</p>
+<p>$$\sigma^2_P(n) = \frac{1}{n^2} \sum_{i=1}^{n}\sum_{j=1}^{n} \Sigma_{ij}$$</p>
+<p>This expression shows that the portfolio's variance is the sum of all the variances and covariances in $\Sigma$, scaled by the square of the reciprocal of the number of securities in the portfolio.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>b. <strong>Variance Convergence</strong></p>
+<p>Prove that when goes to infinity, the variance of the Equally Weighted Portfolio’s variance $\sigma^2_P(n)$ converges to the average covariance between all securities’ returns.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>To prove that as the number of securities $n$ in an equally weighted portfolio goes to infinity, the portfolio's variance $\sigma^2_P(n)$ converges to the average covariance between all securities' returns, we start with the expression for the portfolio's variance derived previously:</p>
+<p>$$\sigma^2_P(n) = \frac{1}{n^2} \sum_{i=1}^{n}\sum_{j=1}^{n} \Sigma_{ij}$$</p>
+<p>This expression includes all variances along the diagonal ($\Sigma_{ii}$) and all pairwise covariances ($\Sigma_{ij}$ for $i \neq j$). As $n$ becomes very large, the impact of variances on the portfolio's total variance diminishes because there are $n$ variances compared to $n(n-1)$ covariances. Therefore, the <strong>variances become negligible</strong>, and the covariances dominate.</p>
+<p>Let's separate the variances and covariances:</p>
+<p>$$\sigma^2_P(n) = \frac{1}{n^2} \left(\sum_{i=1}^{n}\Sigma_{ii} + \sum_{i=1}^{n}\sum_{j \neq i}^{n} \Sigma_{ij}\right)$$</p>
+<p>As $n$ approaches infinity, the first term, which is the sum of variances, grows linearly with $n$, while the second term, which is the sum of the covariances, grows quadratically with $n^2$. The contribution of the first term relative to the second term therefore becomes <strong>zero</strong> in the limit:</p>
+<p>$$\lim_{n \to \infty} \frac{1}{n^2} \sum_{i=1}^{n}\Sigma_{ii} = 0$$</p>
+<p>Now, consider the second term, which is the sum of all pairwise covariances. Each covariance term $\Sigma_{ij}$ is counted twice in the double summation (once for $i, j$ and once for $j, i$), except for the variances. Therefore, in the limit, the portfolio variance converges to <strong>twice the average</strong> of the off-diagonal elements of $\Sigma$:</p>
+<p>$$\lim_{n \to \infty} \sigma^2_P(n) = \lim_{n \to \infty} \frac{2}{n^2} \sum_{i=1}^{n}\sum_{j \neq i}^{n} \frac{\Sigma_{ij}}{2}$$</p>
+<p>Simplifying further, since each covariance $\Sigma_{ij}$ for $i \neq j$ appears twice in the double summation:</p>
+<p>$$\lim_{n \to \infty} \sigma^2_P(n) = \lim_{n \to \infty} \frac{1}{n(n-1)} \sum_{i=1}^{n}\sum_{j \neq i}^{n} \Sigma_{ij}$$</p>
+<p>This is precisely the definition of the <strong>average covariance</strong> between all pairs of securities:</p>
+<p>$$\lim_{n \to \infty} \sigma^2_P(n) = \text{average covariance}$$</p>
+<p>Thus, we have shown that as the number of securities in the equally weighted portfolio becomes very large, the portfolio's variance converges to the <strong>average pairwise covariance</strong> between all securities' returns.</p>
+</div>
+</div>
+</div>
+</div>
 </main>
 </body>
 </html>
