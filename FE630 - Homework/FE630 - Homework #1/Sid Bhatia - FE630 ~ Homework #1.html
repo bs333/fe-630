@@ -8767,6 +8767,98 @@ META    0.090059  0.138189  0.123173  0.290097
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="6.-Case-of-Two---A-Portfolio-with-2-Securities:-Bringing-the-Risk-to-Zero-(10-pts)">6. Case of Two - A Portfolio with 2 Securities: Bringing the Risk to Zero (10 pts)<a class="anchor-link" href="#6.-Case-of-Two---A-Portfolio-with-2-Securities:-Bringing-the-Risk-to-Zero-(10-pts)">¶</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We assume that $n = 2$ and denote by and denote by $\rho$ the covariance between $r_1$ and $r_2$. Analyze the Portfolio’s Risk $\sigma_P$ and Expected Return $\mu_p = E(r_p)$, and provide their analytical expressions as a function of $\rho$. Write a computer program in Python or R to plot the efficient frontier (graph of $\mu_p$ [y-axis] as a function $\sigma_P$ [x-axis]) in three following scenarios:</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>When the portfolio consists of only two securities ($n=2$), and we denote the covariance between the returns of security 1 ($r_1$) and security 2 ($r_2$) by $\rho$. The expected return of the portfolio $\mu_p$ and the portfolio's risk $\sigma_P$ can be expressed as a function of $\rho$ as follows:</p>
+<h5 id="Expected-Return-of-the-Portfolio:"><em>Expected Return of the Portfolio</em>:<a class="anchor-link" href="#Expected-Return-of-the-Portfolio:">¶</a></h5><p>Given an equally weighted portfolio, the weights are $\omega_1 = \omega_2 = \frac{1}{2}$. The expected return of the portfolio $\mu_p$ is the weighted average of the expected returns of the individual securities, which can be written as:</p>
+<p>$$\mu_p = \omega_1 \mu_1 + \omega_2 \mu_2 = \frac{1}{2} \mu_1 + \frac{1}{2} \mu_2$$</p>
+<p>Here, $\mu_1$ and $\mu_2$ are the expected returns of security 1 and security 2, respectively.</p>
+<h5 id="Portfolio's-Risk:"><em>Portfolio's Risk</em>:<a class="anchor-link" href="#Portfolio's-Risk:">¶</a></h5><p>The variance of the portfolio's return $\sigma_P^2$ for two assets is given by:</p>
+<p>$$\sigma_P^2 = \omega_1^2 \sigma_1^2 + \omega_2^2 \sigma_2^2 + 2 \omega_1 \omega_2 \rho$$</p>
+<p>Substituting the equal weights $\omega_1 = \omega_2 = \frac{1}{2}$ and simplifying, we get:</p>
+<p>$$\sigma_P^2 = \frac{1}{4} \sigma_1^2 + \frac{1}{4} \sigma_2^2 + \frac{1}{2} \rho$$</p>
+<p>The portfolio's risk $\sigma_P$ is the square root of the variance, so we have:</p>
+<p>$$\sigma_P = \sqrt{\frac{1}{4} \sigma_1^2 + \frac{1}{4} \sigma_2^2 + \frac{1}{2} \rho}$$</p>
+<p>These expressions provide the analytical forms of the expected return and risk of an equally weighted portfolio with two securities as functions of the <strong>covariance</strong> between the securities' returns, denoted by $\rho$.</p>
+<p>If we let $\rho$ be the <strong>correlation coefficient</strong>, then this would be the final expression:</p>
+<p>$$\sigma_P = \sqrt{\frac{1}{4} \sigma_1^2 + \frac{1}{4} \sigma_2^2 + \frac{1}{2} \rho \sigma_1 \sigma_2}$$</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>a. <strong>Perfect Correlation</strong></p>
+<p>Perfect correlation: $\rho = 1$</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>b. <strong>Perfect Anti-Correlation</strong></p>
+<p>Perfect anti-correlation: $\rho = -1$.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>c. <strong>No Correlation</strong></p>
+<p>No correlation: $\rho = 0$.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>For the graphical display of the efficient frontier curve, take $(\mu_1, \mu_2) = (5\%, 10\%)$ for the expected returns and $(\sigma_1, \sigma_2) = (5\%, 15\%)$ for the volatilities.</p>
+</div>
+</div>
+</div>
+</div>
 </main>
 </body>
 </html>
