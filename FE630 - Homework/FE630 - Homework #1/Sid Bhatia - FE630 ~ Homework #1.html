@@ -8308,6 +8308,31 @@ $$U''(r_p) = \frac{d^2}{d(r_p)^2}(-e^{-\lambda r_p}) = -\lambda^2 e^{-\lambda r_
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Given that the distribution of $r$, the random return of the securities, is Gaussian, and considering an investor with a utility function $U(r_p) = -e^{-\lambda r_p}$, where $\lambda &gt; 0$ indicates risk aversion, we aim to prove that maximizing the expected utility $E[U(r_P(\omega))]$ is equivalent to minimizing a linear quadratic objective function that depends only on $\mu$, $\Sigma$, and $\omega$.</p>
+<h5 id="Expected-Utility"><em>Expected Utility</em><a class="anchor-link" href="#Expected-Utility">¶</a></h5><p>The expected utility for the portfolio return $r_P(\omega)$ is given by:</p>
+<p>$$E[U(r_P(\omega))] = E[-e^{-\lambda r_P(\omega)}]$$</p>
+<p>Since $r_P(\omega)$ is a linear combination of the Gaussian random variables $r$, it follows that $r_P(\omega)$ is <strong>also Gaussian</strong>. Let $\mu_P(\omega)$ and $\sigma_P(\omega)^2$ denote the expected return and variance of the portfolio return $r_P(\omega)$ respectively. Then, the expected utility can be expressed as:</p>
+<p>$$E[U(r_P(\omega))] = -\int e^{-\lambda r_P(\omega)} f(r_P(\omega)) dr_P(\omega)$$</p>
+<p>where $f(r_P(\omega))$ is the probability density function of the Gaussian distribution of $r_P(\omega)$.</p>
+<h5 id="Simplification-using-Gaussian-Properties"><em>Simplification using Gaussian Properties</em><a class="anchor-link" href="#Simplification-using-Gaussian-Properties">¶</a></h5><p>For a Gaussian random variable $X \sim \mathcal{N}(\mu, \sigma^2)$, the integral of the form $\int e^{-aX} \phi(X) dX$ (where $\phi(X)$ is the Gaussian density function) can be solved analytically, yielding an expression involving $\mu$ and $\sigma^2$. Applying this to the expected utility expression gives:</p>
+<p>$$E[U(r_P(\omega))] = -e^{-\lambda \mu_P(\omega) + \frac{\lambda^2 \sigma_P(\omega)^2}{2}}$$</p>
+<h5 id="Objective-Function"><em>Objective Function</em><a class="anchor-link" href="#Objective-Function">¶</a></h5><p>Maximizing $E[U(r_P(\omega))]$ is equivalent to maximizing:</p>
+<p>$$-\lambda \mu_P(\omega) + \frac{\lambda^2 \sigma_P(\omega)^2}{2}$$</p>
+<p>Since maximizing a function is equivalent to minimizing its negative, we define the objective function to minimize as:</p>
+<p>$$J(\omega) = \lambda \mu_P(\omega) - \frac{\lambda^2 \sigma_P(\omega)^2}{2}$$</p>
+<p>where $\mu_P(\omega) = \omega^T \mu$ and $\sigma_P(\omega)^2 = \omega^T \Sigma \omega$. Thus, the problem of maximizing expected utility translates to minimizing:</p>
+<p>$$J(\omega) = \lambda \omega^T \mu - \frac{\lambda^2 \omega^T \Sigma \omega}{2}$$</p>
+<p>This is a <strong>linear quadratic objective function</strong> dependent only on $\mu$, $\Sigma$, and $\omega$, establishing the equivalence as required.</p>
+</div>
+</div>
+</div>
+</div>
 </main>
 </body>
 </html>
