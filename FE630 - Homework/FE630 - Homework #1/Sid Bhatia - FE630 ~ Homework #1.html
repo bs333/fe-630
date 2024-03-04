@@ -8132,6 +8132,84 @@ Taylor Series Expected Utility Approximation: 32.1454
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>c. $\boldsymbol{k = 2}$</p>
+<p>Assume that $k = 2$. What is the Certainty equivalent of this risky game? What is the exact risk premium of this risky game? How good is the approximation obtained by using a Taylor series expansion and absolute Risk-aversion coefficient?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Recalculate CE, RP, and Taylor series approximation with k = 2.</span>
+<span class="n">EU_k2</span> <span class="o">=</span> <span class="n">expected_utility</span><span class="p">(</span><span class="n">W0</span><span class="p">,</span> <span class="n">W_win</span><span class="p">,</span> <span class="n">W_lose</span><span class="p">,</span> <span class="n">p_win</span><span class="p">,</span> <span class="n">p_lose</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">CE_k2</span> <span class="o">=</span> <span class="n">find_certainty_equivalent</span><span class="p">(</span><span class="n">EU_k2</span><span class="p">,</span> <span class="n">W0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">RP_k2</span> <span class="o">=</span> <span class="n">calculate_risk_premium</span><span class="p">(</span><span class="n">E_W</span><span class="p">,</span> <span class="n">W0</span><span class="p">,</span> <span class="n">CE_k2</span><span class="p">)</span>
+
+<span class="c1"># Taylor series expansion requires the first and second derivatives at W0 for k = 2.</span>
+<span class="n">u_prime_W0_k2</span> <span class="o">=</span> <span class="n">u_prime</span><span class="p">(</span><span class="n">W0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">u_double_prime_W0_k2</span> <span class="o">=</span> <span class="n">u_double_prime</span><span class="p">(</span><span class="n">W0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">EU_approx_k2</span> <span class="o">=</span> <span class="n">taylor_series_approximation</span><span class="p">(</span><span class="n">W0</span><span class="p">,</span> <span class="n">delta_W</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Display the results for k = 2.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Certainty Equivalent for k = 2: </span><span class="si">{</span><span class="n">CE_k2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Risk Premium for k = 2: </span><span class="si">{</span><span class="n">RP_k2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected Utility for k = 2: </span><span class="si">{</span><span class="n">EU_k2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Taylor Series Expected Utility Approximation for k = 2: </span><span class="si">{</span><span class="n">EU_approx_k2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Certainty Equivalent for k = 2: 77.81
+Risk Premium for k = 2: -44.47
+Expected Utility for k = 2: 1161666.67
+Taylor Series Expected Utility Approximation for k = 2: 1067777.78
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol>
+<li><em>What is the Certainty Equivalent of this risky game?</em></li>
+</ol>
+<p>The Certainty Equivalent (CE) for $k = 2$ is $\bf{\$77.81}$. This value represents the guaranteed amount of money that yields the same utility as the expected utility of the risky game for the investor. Given the utility function $u(W) = W^2$, this CE indicates the investor would be indifferent between a sure gain of $\$77.81$ and participating in the risky game with the potential to win $\$250$ or lose $\$400$ with specified probabilities.</p>
+<ol start="2">
+<li><em>What is the exact Risk Premium of this risky game?</em></li>
+</ol>
+<p>The exact Risk Premium (RP) for $k = 2$ is $\bf{-\$44.47}$. Typically, the risk premium is expected to be a <strong>positive value</strong>, indicating the amount an investor requires over the expected value of a risky asset to be indifferent between the risky and a certain outcome. A negative risk premium, in this context, suggests that the investor values the gamble more than the expected wealth itself, possibly due to the convexity of the utility function $u(W) = W^2$, which implies risk-seeking behavior. This is because, with $k = 2$, the investor's utility function shows <strong>increasing marginal utility</strong> for wealth, leading to a preference for the gamble over a certain outcome with the same expected monetary value.</p>
+<ol start="3">
+<li><em>How good is the approximation obtained by using a Taylor series expansion and absolute Risk-aversion coefficient?</em></li>
+</ol>
+<p>The Expected Utility calculated directly is <strong>1161666.67</strong> while the Taylor Series Expected Utility Approximation for $k = 2$ is <strong>1067777.78</strong>. The approximation provides a simplified way to estimate expected utility based on local changes in wealth (due to the gamble), but <strong>it does not capture the exact utility</strong> because of the non-linear nature of the utility function at $k = 2$. The significant difference between the actual expected utility and the Taylor series approximation reflects the <strong>limitations</strong> of using a <strong>second-order Taylor series</strong> to approximate the utility over a larger range of wealth changes, especially with a highly convex utility function as in the case with $k = 2$. The approximation is useful for small changes in wealth but becomes less accurate for games with outcomes that substantially alter the wealth, as seen in this scenario.</p>
+</div>
+</div>
+</div>
+</div>
 </main>
 </body>
 </html>
