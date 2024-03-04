@@ -8285,6 +8285,29 @@ $$U''(r_p) = \frac{d^2}{d(r_p)^2}(-e^{-\lambda r_p}) = -\lambda^2 e^{-\lambda r_
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Given a portfolio of $n$ securities with returns vector $r = (r_1, r_2, \dots, r_n)^T$, expected returns vector $\mu = E(r)$, and the variance-covariance matrix $\Sigma = cov(r)$, and considering the portfolio is defined by a vector of weights $\omega = (\omega_1, \omega_2, \dots, \omega_n)^T$, we can express:</p>
+<ol>
+<li><p><strong>The Expected Return of the Portfolio, $\mu_p(\omega)$</strong>, as a function of $\mu$:</p>
+<p>The expected return of the portfolio is calculated as the <strong>dot/inner product</strong> of the weights vector $\omega$ and the expected returns vector $\mu$:</p>
+<p>$$\mu_p(\omega) = \omega^T \mu$$</p>
+<p>This expression represents the weighted sum of the expected returns of the individual securities in the portfolio, where each security's expected return is multiplied by its corresponding weight in the portfolio.</p>
+</li>
+<li><p><strong>The Variance of the Portfolio, $\sigma_p(\omega)^2$</strong>, as a function of $\Sigma$:</p>
+<p>The variance of the portfolio is calculated using the weights vector $\omega$ and the variance-covariance matrix $\Sigma$:</p>
+<p>$$\sigma_p(\omega)^2 = \omega^T \Sigma \omega$$</p>
+<p>This formula captures the combined risk of the portfolio by taking into account not only the variances of individual security returns (diagonal elements of $\Sigma$) but also the covariances between pairs of securities (off-diagonal elements of $\Sigma$). The portfolio's variance is a measure of the total risk of the portfolio, considering the diversification effect due to correlations among the securities.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
 </main>
 </body>
 </html>
