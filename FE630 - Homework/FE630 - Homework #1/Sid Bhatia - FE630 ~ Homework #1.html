@@ -8355,6 +8355,66 @@ $$U''(r_p) = \frac{d^2}{d(r_p)^2}(-e^{-\lambda r_p}) = -\lambda^2 e^{-\lambda r_
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+
+<span class="c1"># Define the tickers.</span>
+<span class="n">tickers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'AAPL'</span><span class="p">,</span> <span class="s1">'GOOGL'</span><span class="p">,</span> <span class="s1">'META'</span><span class="p">,</span> <span class="s1">'AMZN'</span><span class="p">]</span>
+
+<span class="c1"># Define the date range.</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="s1">'2022-01-01'</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="s1">'2023-12-30'</span>
+
+<span class="c1"># Download the stock data.</span>
+<span class="n">stock_data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">tickers</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_date</span><span class="p">)</span>
+
+<span class="c1"># Display the closing prices.</span>
+<span class="n">closing_prices</span> <span class="o">=</span> <span class="n">stock_data</span><span class="p">[</span><span class="s1">'Close'</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">closing_prices</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>[*********************100%%**********************]  4 of 4 completed</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Ticker            AAPL        AMZN       GOOGL        META
+Date                                                      
+2022-01-03  182.009995  170.404495  144.991501  338.540009
+2022-01-04  179.699997  167.522003  144.399506  336.529999
+2022-01-05  174.919998  164.356995  137.774994  324.170013
+2022-01-06  172.000000  163.253998  137.747498  332.459991
+2022-01-07  172.169998  162.554001  137.016998  331.790009
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -8364,6 +8424,59 @@ $$U''(r_p) = \frac{d^2}{d(r_p)^2}(-e^{-\lambda r_p}) = -\lambda^2 e^{-\lambda r_
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>b. <strong>Expected Returns Vector &amp; Covariance Matrix</strong></p>
 <p>Use the entire data to compute the Expected Returns Vector and Covariance matrix.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Compute daily returns.</span>
+<span class="n">daily_returns</span> <span class="o">=</span> <span class="n">closing_prices</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Expected Returns Vector (mean of daily returns).</span>
+<span class="n">expected_returns</span> <span class="o">=</span> <span class="n">daily_returns</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Covariance Matrix of returns.</span>
+<span class="n">covariance_matrix</span> <span class="o">=</span> <span class="n">daily_returns</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+
+<span class="c1"># Display the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Expected Returns Vector:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">expected_returns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Covariance Matrix:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">covariance_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>
+Expected Returns Vector:
+ Ticker
+AAPL     0.000279
+AMZN     0.000129
+GOOGL    0.000167
+META     0.000680
+dtype: float64
+
+Covariance Matrix:
+ Ticker      AAPL      AMZN     GOOGL      META
+Ticker                                        
+AAPL    0.000335  0.000305  0.000283  0.000357
+AMZN    0.000305  0.000719  0.000401  0.000548
+GOOGL   0.000283  0.000401  0.000483  0.000489
+META    0.000357  0.000548  0.000489  0.001151
+</pre>
+</div>
 </div>
 </div>
 </div>
