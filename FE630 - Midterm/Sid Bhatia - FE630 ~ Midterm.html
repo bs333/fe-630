@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>FE630 - Midterm</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Sid Bhatia - FE630 ~ Midterm</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7781,6 +7781,88 @@ Adj Close   0.000040   0.000032   0.000112
 
 [30 rows x 30 columns]
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Question-2.-(15-pts)">Question 2. (15 pts)<a class="anchor-link" href="#Question-2.-(15-pts)">¶</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Write a function called $\texttt{port}$ that uses standard quadratic programming libraries that will:</p>
+<ul>
+<li>Take the set of input parameters $\texttt{mu}$ (mean vector $\mu$), $\texttt{Q}$ (covariance matrix $Q$), and $\texttt{tau}$ (risk tolerance $\tau$), and return vector $h$ that maximizes the following utility function $U$ defined by: $$U(h) = -\frac{1}{2}h^T Q h + \tau h^T \mu$$ subject to the constraints $$0 \leq h_i \leq 0.1 \; \text{for all} \; i, \; \text{and}$$ $$\sum_{i=1}^n h_i = h^T e = 1$$ where $n$ is the number of securities in the portfolio.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
+
+<span class="k">def</span> <span class="nf">port</span><span class="p">(</span><span class="n">mu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Q</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">tau</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Solves the portfolio optimization problem to maximize the utility function</span>
+<span class="sd">    under given constraints using quadratic programming.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - mu (np.ndarray): The mean return vector for the securities.</span>
+<span class="sd">    - Q (np.ndarray): The covariance matrix of the securities' returns.</span>
+<span class="sd">    - tau (float): The risk tolerance parameter of the utility function.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    - h (np.ndarray): The optimized portfolio weights vector.</span>
+<span class="sd">    """</span>
+    
+    <span class="c1"># Number of securities</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    
+    <span class="c1"># Portfolio weights variable</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+    <span class="c1"># Define utility function to maximize.</span>
+    <span class="n">utility</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">cp</span><span class="o">.</span><span class="n">quad_form</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">cp</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">utility</span><span class="p">)</span>
+
+    <span class="c1"># Constraints: 0 &lt;= h_i &lt;= 0.1 for all i, and sum(h_i) == 1</span>
+    <span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">,</span> <span class="n">h</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">constraints</span><span class="p">)</span>
+
+    <span class="c1"># Problem definition</span>
+    <span class="n">problem</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">utility</span><span class="p">),</span> <span class="n">constraints</span><span class="p">)</span>
+    
+    <span class="c1"># Solve the problem.</span>
+    <span class="n">problem</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    
+    <span class="c1"># Return the optimized portfolio weights.</span>
+    <span class="k">return</span> <span class="n">h</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
 </div>
 </div>
 </div>
