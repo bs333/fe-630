@@ -8003,6 +8003,676 @@ Adj Close   0.000040   0.000032   0.000112
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The supplied $\texttt{Midtermdata.zip}$ file contains an $\bf{R}$ data file $\texttt{data.rda}$ and a tab-delimited text file $\texttt{data.tsv}$ containing the Dow-Jones Industrial Index and the closing prices for the 30 companies in that index for 250 trading days. <strong>You will use that data for questions 4, 5 and 6.</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Question-4.-(15-pts)">Question 4. (15 pts)<a class="anchor-link" href="#Question-4.-(15-pts)">¶</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Write a program to:</p>
+<ol>
+<li>read in this Dow-Jones data,</li>
+<li>convert the matrix of daily prices to daily simple returns (not logarithmic returns),</li>
+<li>annualize the returns by multiplying them by 252 (the typical number of trading days in a year),</li>
+<li>move the index column out of the matrix and into a separate vector,</li>
+<li>compute a covariance matrix $\texttt{Qts}$ based on the time-series of returns, and</li>
+<li>print out the first five rows and five columns of the covariance matrix.</li>
+</ol>
+<p>Clearly describe all steps in your program with comments. List your program in your answer document. No points will be awarded unless the steps associated with each part of the question are clearly distinguished. Also, submit the source code file.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Step-1."><em>Step 1.</em><a class="anchor-link" href="#Step-1.">¶</a></h5>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Reads the data from a tab-delimited text file into a pandas DataFrame.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - file_path (str): The path to the data file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - pd.DataFrame: A DataFrame with the Dow-Jones data.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Try to read the data with tab as delimiter; if that fails, try to infer the delimiter.</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">pd</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">ParserError</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">)</span>
+    
+    <span class="c1"># Check if the data has been read into separate columns, otherwise raise an error.</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Data is not being read into separate columns. Check the delimiter."</span><span class="p">)</span>
+    
+    <span class="c1"># Convert the first column to datetime and set it as the index.</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Reads the data from a comma-delimited text file into a pandas DataFrame, </span>
+<span class="sd">    setting the first row as the header and the first column as a DateTime index.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - file_path (str): The path to the data file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - pd.DataFrame: A DataFrame with the Dow-Jones data, with correct column names and a DateTime index.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Read the file, explicitly mentioning that the first row should be used as the header</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># Correctly set the first column's name and use it as the index</span>
+    <span class="c1"># Assuming the first column contains the date in 'YYYYMMDD' format and needs conversion to DateTime type</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Date'</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">'</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>  <span class="c1"># Rename columns to fix 'Unnamed: X' issue</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'%Y%m</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span>  <span class="c1"># Convert the 'Date' column to DateTime</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'Date'</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Set the 'Date' column as the index</span>
+    
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Step-2."><em>Step 2.</em><a class="anchor-link" href="#Step-2.">¶</a></h5>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calculate_simple_returns</span><span class="p">(</span><span class="n">prices</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Converts a matrix of daily prices to daily simple returns.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - prices (pd.DataFrame): A DataFrame with daily prices.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - pd.DataFrame: A DataFrame with daily simple returns.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Calculate daily simple returns.</span>
+    <span class="n">returns</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>  <span class="c1"># Drop the first row as the return for the first day is not defined.</span>
+    <span class="k">return</span> <span class="n">returns</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Step-3."><em>Step 3.</em><a class="anchor-link" href="#Step-3.">¶</a></h5>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">annualize_returns</span><span class="p">(</span><span class="n">returns</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Annualizes the daily simple returns.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - returns (pd.DataFrame): A DataFrame with daily simple returns.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - pd.DataFrame: A DataFrame with annualized returns.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Multiply by the number of trading days to annualize.</span>
+    <span class="n">annual_returns</span> <span class="o">=</span> <span class="n">returns</span> <span class="o">*</span> <span class="mi">252</span>
+    <span class="k">return</span> <span class="n">annual_returns</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Step-4."><em>Step 4.</em><a class="anchor-link" href="#Step-4.">¶</a></h5>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="k">def</span> <span class="nf">extract_index</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Moves the index column out of the DataFrame into a separate vector.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - data (pd.DataFrame): A DataFrame with the index as one of the columns.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - Tuple[pd.DataFrame, pd.Series]: A tuple of the DataFrame without the index column and the index column as a Series.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Assuming the index is the first column, we separate it from the data.</span>
+    <span class="n">index_column</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">data_without_index</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">data_without_index</span><span class="p">,</span> <span class="n">index_column</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Step-5."><em>Step 5.</em><a class="anchor-link" href="#Step-5.">¶</a></h5>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_covariance_matrix</span><span class="p">(</span><span class="n">returns</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Computes the covariance matrix based on the time-series of returns.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - returns (pd.DataFrame): A DataFrame with annualized returns.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - pd.DataFrame: The covariance matrix of the returns.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Compute the covariance matrix.</span>
+    <span class="n">Qts</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">Qts</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Step-6."><em>Step 6.</em><a class="anchor-link" href="#Step-6.">¶</a></h5>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># file_path = 'Midtermdata/data.tsv'</span>
+<span class="c1"># file_path = 'Midtermdata/data.csv'</span>
+
+<span class="c1"># # Step 1: Read in the data.</span>
+<span class="c1"># data = read_data(file_path)</span>
+
+<span class="c1"># print(data.head())</span>
+
+<span class="c1"># # Step 2 and 3: Convert to simple returns and annualize.</span>
+<span class="c1"># daily_prices = data.drop(columns=data.columns[0])  # Drop the first column if it's an index column.</span>
+
+<span class="c1"># print(daily_prices)</span>
+
+<span class="c1"># daily_returns = calculate_simple_returns(daily_prices)</span>
+<span class="c1"># annual_returns = annualize_returns(daily_returns)</span>
+
+<span class="c1"># # Step 4: Move the index column out of the matrix.</span>
+<span class="c1"># data_without_index, index_column = extract_index(data)</span>
+
+<span class="c1"># # Step 5: Compute the covariance matrix.</span>
+<span class="c1"># Qts = compute_covariance_matrix(annual_returns)</span>
+
+<span class="c1"># # Step 6: Print the first five rows and columns of the covariance matrix.</span>
+<span class="c1"># print(Qts.iloc[:5, :5])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>           Unnamed: 1 Unnamed: 2 Unnamed: 3 Unnamed: 4 Unnamed: 5 Unnamed: 6   
+Date                                                                           
+NaT              ^DJI       AAPL        AXP         BA        CAT       CSCO  \
+2014-10-29   16974.31     105.54      87.13     120.07      96.58      23.38   
+2014-10-30   17195.42     105.18      87.52      120.8      96.55      23.36   
+2014-10-31   17390.52     106.18      88.72     121.86      97.75      23.74   
+2014-11-03   17366.24     107.56      89.61     122.95      96.61      23.85   
+
+           Unnamed: 7 Unnamed: 8 Unnamed: 9 Unnamed: 10  ... Unnamed: 22   
+Date                                                     ...               
+NaT               CVX         DD        DIS          GE  ...         NKE  \
+2014-10-29     112.38      61.77       87.9       24.76  ...       90.94   
+2014-10-30     112.44      62.57      88.57       24.76  ...       91.98   
+2014-10-31     115.08      63.95      89.71        24.9  ...       91.95   
+2014-11-03     112.04       63.7      90.04       24.79  ...       92.43   
+
+           Unnamed: 23 Unnamed: 24 Unnamed: 25 Unnamed: 26 Unnamed: 27   
+Date                                                                     
+NaT                PFE          PG         TRV         UNH         UTX  \
+2014-10-29       28.52        83.8       97.18       91.52      103.46   
+2014-10-30       28.86       84.19       97.75       92.42      103.94   
+2014-10-31       28.97        84.5       98.53       93.54      104.59   
+2014-11-03        29.2       84.61        97.7       93.39       103.9   
+
+           Unnamed: 28 Unnamed: 29 Unnamed: 30 Unnamed: 31  
+Date                                                        
+NaT                  V          VZ         WMT         XOM  
+2014-10-29       53.28       47.51       74.53       91.59  
+2014-10-30       58.74       47.58       74.59       91.45  
+2014-10-31       59.93       47.91       74.41       93.64  
+2014-11-03       59.96       48.05       74.42       92.24  
+
+[5 rows x 31 columns]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Implementation-in-R">Implementation in R<a class="anchor-link" href="#Implementation-in-R">¶</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The following section implements the same concepts as above but in R as parsing the data was easier and more efficient in R.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">lubridate</span><span class="p">)</span>
+
+<span class="c1"># Function to read the data and set the first column as a DateTime index</span>
+<span class="n">read_data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1"># Read the data, assuming the first row is the header</span>
+<span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Convert the first column to Date format assuming it's in 'YYYYMMDD' format</span>
+<span class="w">  </span><span class="c1"># Assuming the first column is named 'Date' or similar; adjust accordingly</span>
+<span class="w">  </span><span class="n">data</span><span class="p">[,</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ymd</span><span class="p">(</span><span class="n">data</span><span class="p">[,</span><span class="m">1</span><span class="p">])</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1"># Set the first column as row names if needed or keep as a separate Date column</span>
+<span class="w">  </span><span class="c1"># Optionally, you can make the date column as row names (not always recommended for time series data in R)</span>
+<span class="w">  </span><span class="c1"># rownames(data) &lt;- data[,1]</span>
+<span class="w">  </span><span class="c1"># data &lt;- data[,-1]</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="nf">return</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Function to calculate simple returns</span>
+<span class="n">calculate_simple_returns</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">returns</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prices</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">lag</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="n">returns</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">na.omit</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span><span class="w">  </span><span class="c1"># Remove NA values resulted from lagging</span>
+<span class="w">  </span><span class="nf">return</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Function to annualize returns</span>
+<span class="n">annualize_returns</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">annual_returns</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">returns</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">252</span>
+<span class="w">  </span><span class="nf">return</span><span class="p">(</span><span class="n">annual_returns</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Function to compute the covariance matrix</span>
+<span class="n">compute_covariance_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Qts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cov</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
+<span class="w">  </span><span class="nf">return</span><span class="p">(</span><span class="n">Qts</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Pre-Processing">Pre-Processing<a class="anchor-link" href="#Pre-Processing">¶</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="highlight"><pre><span></span><span class="c1"># Step 1: Read in the data</span>
+<span class="n">file_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"Midtermdata/data.csv"</span>
+
+<span class="c1"># Read the CSV file, making sure the first row is used as column names.</span>
+<span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">check.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+
+<span class="c1"># Set the value in the first row, first column to "Date"</span>
+<span class="n">data</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"Date"</span>
+
+<span class="c1"># Now, use the first row to set column names and remove the first row from the data</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">]))</span>
+<span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
+
+<span class="c1"># Assuming 'data' is your dataframe and 'Date' is the column with dates in YYYYMMDD format</span>
+<span class="n">data</span><span class="o">$</span><span class="n">Date</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.Date</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">Date</span><span class="p">),</span><span class="w"> </span><span class="n">format</span><span class="o">=</span><span class="s">"%Y%m%d"</span><span class="p">)</span>
+
+<span class="c1"># Assuming the first column is the date, and the rest are the prices</span>
+<span class="n">data</span><span class="p">[,</span><span class="m">-1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sapply</span><span class="p">(</span><span class="n">data</span><span class="p">[,</span><span class="m">-1</span><span class="p">],</span><span class="w"> </span><span class="n">as.numeric</span><span class="p">)</span>
+
+<span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="highlight"><pre><span></span><span class="c1"># dates &lt;- data[[1]] # Extract the first column as dates</span>
+<span class="c1"># prices &lt;- data[-1] # Remove the first column from the data</span>
+<span class="c1"># </span>
+<span class="c1"># # Convert the first column to dates if it's not already</span>
+<span class="c1"># dates &lt;- as.Date(as.character(dates), format="%Y%m%d")</span>
+
+<span class="c1"># Step 2: Calculate daily returns.</span>
+<span class="n">daily_returns</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data</span><span class="p">[,</span><span class="w"> </span><span class="m">-1</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">lag</span><span class="p">(</span><span class="n">data</span><span class="p">[,</span><span class="w"> </span><span class="m">-1</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span>
+<span class="n">daily_returns</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">daily_returns</span><span class="p">[</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w">  </span><span class="c1"># Remove the first row which will be NA.</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="nf">head</span><span class="p">(</span><span class="n">daily_returns</span><span class="p">))</span>
+
+<span class="c1"># Step 3: Annualize the daily returns.</span>
+<span class="n">annual_returns</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">daily_returns</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">252</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">annual_returns</span><span class="p">)</span>
+
+<span class="c1"># Step 4: Extract the index column.</span>
+<span class="c1">## Already did in pre-processing.</span>
+
+<span class="c1"># Step 5: Compute the covariance matrix of daily returns.</span>
+<span class="n">Qts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cov</span><span class="p">(</span><span class="n">daily_returns</span><span class="p">,</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"pairwise.complete.obs"</span><span class="p">)</span>
+
+<span class="c1"># Step 6: Print out the first five rows and columns of the covariance matrix.</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">Qts</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The table below shows the annualized returns for selected stocks:</p>
+<table>
+<thead>
+<tr>
+<th>Ticker</th>
+<th>Annualized Return</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^DJI</td>
+<td>4.91%</td>
+</tr>
+<tr>
+<td>AAPL</td>
+<td>12.34%</td>
+</tr>
+<tr>
+<td>AXP</td>
+<td>-13.92%</td>
+</tr>
+<tr>
+<td>BA</td>
+<td>22.56%</td>
+</tr>
+<tr>
+<td>CAT</td>
+<td>-27.28%</td>
+</tr>
+<tr>
+<td>CSCO</td>
+<td>24.10%</td>
+</tr>
+<tr>
+<td>CVX</td>
+<td>-20.34%</td>
+</tr>
+<tr>
+<td>DD</td>
+<td>0.44%</td>
+</tr>
+<tr>
+<td>DIS</td>
+<td>28.20%</td>
+</tr>
+<tr>
+<td>GE</td>
+<td>20.38%</td>
+</tr>
+<tr>
+<td>GS</td>
+<td>3.93%</td>
+</tr>
+<tr>
+<td>HD</td>
+<td>30.27%</td>
+</tr>
+<tr>
+<td>IBM</td>
+<td>-7.88%</td>
+</tr>
+<tr>
+<td>INTC</td>
+<td>8.08%</td>
+</tr>
+<tr>
+<td>JNJ</td>
+<td>-1.32%</td>
+</tr>
+<tr>
+<td>JPM</td>
+<td>12.55%</td>
+</tr>
+<tr>
+<td>KO</td>
+<td>8.23%</td>
+</tr>
+<tr>
+<td>MCD</td>
+<td>24.77%</td>
+</tr>
+<tr>
+<td>MMM</td>
+<td>7.65%</td>
+</tr>
+<tr>
+<td>MRK</td>
+<td>-0.56%</td>
+</tr>
+<tr>
+<td>MSFT</td>
+<td>21.98%</td>
+</tr>
+<tr>
+<td>NKE</td>
+<td>39.47%</td>
+</tr>
+<tr>
+<td>PFE</td>
+<td>19.97%</td>
+</tr>
+<tr>
+<td>PG</td>
+<td>-6.73%</td>
+</tr>
+<tr>
+<td>TRV</td>
+<td>16.45%</td>
+</tr>
+<tr>
+<td>UNH</td>
+<td>27.39%</td>
+</tr>
+<tr>
+<td>UTX</td>
+<td>-1.26%</td>
+</tr>
+<tr>
+<td>V</td>
+<td>41.52%</td>
+</tr>
+<tr>
+<td>VZ</td>
+<td>-1.20%</td>
+</tr>
+<tr>
+<td>WMT</td>
+<td>-23.16%</td>
+</tr>
+<tr>
+<td>XOM</td>
+<td>-9.78%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Below is the covariance matrix for a subset of the stocks:</p>
+<pre><code class="language-plaintext">plaintext
+             ^DJI         AAPL          AXP           BA          CAT
+^DJI 8.873133e-05 1.010457e-04 7.573449e-05 9.047886e-05 9.436840e-05
+AAPL 1.010457e-04 2.706878e-04 8.131692e-05 1.278212e-04 1.181664e-04
+AXP  7.573449e-05 8.131692e-05 1.858309e-04 5.841554e-05 7.909844e-05
+BA   9.047886e-05 1.278212e-04 5.841554e-05 1.823244e-04 9.310019e-05
+CAT  9.436840e-05 1.181664e-04 7.909844e-05 9.310019e-05 2.454428e-04
+</code></pre>
+</div>
+</div>
+</div>
+</div>
 </main>
 </body>
 </html>
