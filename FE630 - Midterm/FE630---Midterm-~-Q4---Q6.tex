@@ -1,0 +1,352 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={FE630 - Midterm Project \textasciitilde{} Q4 - Q6},
+  pdfauthor={Sid Bhatia},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{FE630 - Midterm Project \textasciitilde{} Q4 - Q6}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{I pledge my honor that I have abided by the Stevens Honor
+System.}
+\author{Sid Bhatia}
+\date{2024-03-26}
+
+\begin{document}
+\maketitle
+
+\paragraph{Question 4. (15 pts)}\label{question-4.-15-pts}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.2     v readr     2.1.4
+## v forcats   1.0.0     v stringr   1.5.0
+## v ggplot2   3.4.2     v tibble    3.2.1
+## v lubridate 1.9.3     v tidyr     1.3.0
+## v purrr     1.0.1     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lubridate)}
+
+\CommentTok{\# Function to read the data and set the first column as a DateTime index}
+\NormalTok{read\_data }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(file\_path) \{}
+  \CommentTok{\# Read the data, assuming the first row is the header}
+\NormalTok{  data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(file\_path, }\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{)}
+  
+  \CommentTok{\# Convert the first column to Date format assuming it\textquotesingle{}s in \textquotesingle{}YYYYMMDD\textquotesingle{} format}
+  \CommentTok{\# Assuming the first column is named \textquotesingle{}Date\textquotesingle{} or similar; adjust accordingly}
+\NormalTok{  data[,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{ymd}\NormalTok{(data[,}\DecValTok{1}\NormalTok{])}
+  
+  \CommentTok{\# Set the first column as row names if needed or keep as a separate Date column}
+  \CommentTok{\# Optionally, you can make the date column as row names (not always recommended for time series data in R)}
+  \CommentTok{\# rownames(data) \textless{}{-} data[,1]}
+  \CommentTok{\# data \textless{}{-} data[,{-}1]}
+  
+  \FunctionTok{return}\NormalTok{(data)}
+\NormalTok{\}}
+
+\CommentTok{\# Function to calculate simple returns}
+\NormalTok{calculate\_simple\_returns }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(prices) \{}
+\NormalTok{  returns }\OtherTok{\textless{}{-}}\NormalTok{ prices }\SpecialCharTok{/} \FunctionTok{lag}\NormalTok{(prices) }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{  returns }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(returns)  }\CommentTok{\# Remove NA values resulted from lagging}
+  \FunctionTok{return}\NormalTok{(returns)}
+\NormalTok{\}}
+
+\CommentTok{\# Function to annualize returns}
+\NormalTok{annualize\_returns }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(returns) \{}
+\NormalTok{  annual\_returns }\OtherTok{\textless{}{-}}\NormalTok{ returns }\SpecialCharTok{*} \DecValTok{252}
+  \FunctionTok{return}\NormalTok{(annual\_returns)}
+\NormalTok{\}}
+
+\CommentTok{\# Function to compute the covariance matrix}
+\NormalTok{compute\_covariance\_matrix }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(returns) \{}
+\NormalTok{  Qts }\OtherTok{\textless{}{-}} \FunctionTok{cov}\NormalTok{(returns)}
+  \FunctionTok{return}\NormalTok{(Qts)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{Pre-Processing}\label{pre-processing}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Step 1: Read in the data}
+\NormalTok{file\_path }\OtherTok{\textless{}{-}} \StringTok{"Midtermdata/data.csv"}
+
+\CommentTok{\# Read the CSV file, making sure the first row is used as column names.}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(file\_path, }\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{check.names =} \ConstantTok{FALSE}\NormalTok{)}
+
+\CommentTok{\# Set the value in the first row, first column to "Date"}
+\NormalTok{data[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Date"}
+
+\CommentTok{\# Now, use the first row to set column names and remove the first row from the data}
+\FunctionTok{colnames}\NormalTok{(data) }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(}\FunctionTok{unlist}\NormalTok{(data[}\DecValTok{1}\NormalTok{, ]))}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ data[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, ]}
+
+\CommentTok{\# Assuming \textquotesingle{}data\textquotesingle{} is your dataframe and \textquotesingle{}Date\textquotesingle{} is the column with dates in YYYYMMDD format}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{Date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{Date), }\AttributeTok{format=}\StringTok{"\%Y\%m\%d"}\NormalTok{)}
+
+\CommentTok{\# Assuming the first column is the date, and the rest are the prices}
+\NormalTok{data[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(data[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{], as.numeric)}
+
+\FunctionTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Date     ^DJI   AAPL   AXP     BA   CAT  CSCO    CVX    DD   DIS    GE
+## 2 2014-10-29 16974.31 105.54 87.13 120.07 96.58 23.38 112.38 61.77 87.90 24.76
+## 3 2014-10-30 17195.42 105.18 87.52 120.80 96.55 23.36 112.44 62.57 88.57 24.76
+## 4 2014-10-31 17390.52 106.18 88.72 121.86 97.75 23.74 115.08 63.95 89.71 24.90
+## 5 2014-11-03 17366.24 107.56 89.61 122.95 96.61 23.85 112.04 63.70 90.04 24.79
+## 6 2014-11-04 17383.84 106.77 90.13 122.77 95.05 24.14 110.69 63.36 88.70 24.79
+## 7 2014-11-05 17484.53 107.03 91.15 121.89 95.83 24.40 112.30 64.56 89.34 24.91
+##       GS    HD    IBM  INTC    JNJ   JPM    KO   MCD    MMM   MRK  MSFT   NKE
+## 2 183.70 94.48 158.69 32.95 102.61 57.73 39.67 89.55 147.31 54.44 45.40 90.94
+## 3 184.58 95.56 159.55 31.64 104.05 57.82 40.10 90.18 148.38 55.52 44.85 91.98
+## 4 187.56 95.56 159.60 33.03 104.77 58.88 40.56 90.52 150.00 56.13 45.73 91.95
+## 5 188.39 94.16 159.56 33.32 104.46 59.27 40.49 90.40 149.55 57.08 46.20 92.43
+## 6 187.84 94.03 157.90 33.55 105.58 58.66 40.50 91.23 151.25 57.52 46.33 92.92
+## 7 187.41 93.86 157.10 33.00 105.78 59.54 40.98 91.40 151.88 57.71 46.61 93.64
+##     PFE    PG   TRV   UNH    UTX     V    VZ   WMT   XOM
+## 2 28.52 83.80 97.18 91.52 103.46 53.28 47.51 74.53 91.59
+## 3 28.86 84.19 97.75 92.42 103.94 58.74 47.58 74.59 91.45
+## 4 28.97 84.50 98.53 93.54 104.59 59.93 47.91 74.41 93.64
+## 5 29.20 84.61 97.70 93.39 103.90 59.96 48.05 74.42 92.24
+## 6 29.28 85.83 98.85 93.51 104.47 60.31 47.99 75.38 91.52
+## 7 29.30 86.18 99.20 94.31 105.50 61.94 48.00 75.81 92.05
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# dates \textless{}{-} data[[1]] \# Extract the first column as dates}
+\CommentTok{\# prices \textless{}{-} data[{-}1] \# Remove the first column from the data}
+\CommentTok{\# }
+\CommentTok{\# \# Convert the first column to dates if it\textquotesingle{}s not already}
+\CommentTok{\# dates \textless{}{-} as.Date(as.character(dates), format="\%Y\%m\%d")}
+
+\CommentTok{\# Step 2: Calculate daily returns.}
+\NormalTok{daily\_returns }\OtherTok{\textless{}{-}}\NormalTok{ data[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{/} \FunctionTok{lag}\NormalTok{(data[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{daily\_returns }\OtherTok{\textless{}{-}}\NormalTok{ daily\_returns[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, ]  }\CommentTok{\# Remove the first row which will be NA.}
+
+\FunctionTok{print}\NormalTok{(}\FunctionTok{head}\NormalTok{(daily\_returns))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           ^DJI         AAPL          AXP           BA           CAT
+## 3  0.013026155 -0.003411029  0.004476070  0.006079787 -0.0003106233
+## 4  0.011346044  0.009507511  0.013711152  0.008774834  0.0124287934
+## 5 -0.001396163  0.012996798  0.010031560  0.008944691 -0.0116624041
+## 6  0.001013461 -0.007344738  0.005802924 -0.001464010 -0.0161473967
+## 7  0.005792161  0.002435141  0.011316987 -0.007167875  0.0082062073
+## 8  0.004000108  0.002896384 -0.008996160  0.002953483  0.0150266096
+##           CSCO           CVX           DD          DIS           GE
+## 3 -0.000855432  0.0005339028  0.012951271  0.007622298  0.000000000
+## 4  0.016267123  0.0234791889  0.022055298  0.012871175  0.005654281
+## 5  0.004633530 -0.0264164060 -0.003909304  0.003678520 -0.004417671
+## 6  0.012159329 -0.0120492681 -0.005337520 -0.014882275  0.000000000
+## 7  0.010770505  0.0145451260  0.018939394  0.007215333  0.004840662
+## 8  0.004508197  0.0126447017  0.004337051  0.010969331  0.020875151
+##             GS           HD           IBM         INTC          JNJ
+## 3  0.004790419  0.011430991  0.0054193711 -0.039757208  0.014033720
+## 4  0.016144761  0.000000000  0.0003133814  0.043931732  0.006919750
+## 5  0.004425251 -0.014650481 -0.0002506266  0.008779897 -0.002958862
+## 6 -0.002919476 -0.001380629 -0.0104036099  0.006902761  0.010721807
+## 7 -0.002289182 -0.001807934 -0.0050664978 -0.016393443  0.001894298
+## 8  0.006136279  0.015768165  0.0045830681  0.001818182  0.001701645
+##            JPM            KO           MCD          MMM          MRK
+## 3  0.001558981  0.0108394253  0.0070351759  0.007263594  0.019838354
+## 4  0.018332757  0.0114713217  0.0037702373  0.010917913  0.010987032
+## 5  0.006623641 -0.0017258383 -0.0013256739 -0.003000000  0.016924996
+## 6 -0.010291885  0.0002469746  0.0091814159  0.011367436  0.007708479
+## 7  0.015001705  0.0118518519  0.0018634221  0.004165289  0.003303199
+## 8  0.001175680 -0.0004880429  0.0002188184  0.002304451 -0.005198406
+##           MSFT           NKE          PFE           PG          TRV
+## 3 -0.012114537  0.0114361117 0.0119214586  0.004653938  0.005865404
+## 4  0.019620959 -0.0003261579 0.0038115038  0.003682148  0.007979540
+## 5  0.010277717  0.0052202284 0.0079392475  0.001301775 -0.008423830
+## 6  0.002813853  0.0053013091 0.0027397260  0.014419099  0.011770727
+## 7  0.006043600  0.0077486009 0.0006830601  0.004077828  0.003540718
+## 8  0.017592791 -0.0008543358 0.0000000000 -0.001160362  0.004133065
+##            UNH          UTX           V            VZ           WMT
+## 3  0.009833916  0.004639474 0.102477477  0.0014733740  0.0008050449
+## 4  0.012118589  0.006253608 0.020258767  0.0069356873 -0.0024131921
+## 5 -0.001603592 -0.006597189 0.000500584  0.0029221457  0.0001343905
+## 6  0.001284934  0.005486044 0.005837225 -0.0012486993  0.0128997581
+## 7  0.008555235  0.009859290 0.027027027  0.0002083767  0.0057044309
+## 8  0.004347365  0.005971564 0.002260252 -0.0012500000  0.0013190872
+##            XOM
+## 3 -0.001528551
+## 4  0.023947512
+## 5 -0.014950876
+## 6 -0.007805724
+## 7  0.005791084
+## 8  0.012601847
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Step 3: Annualize the daily returns.}
+\NormalTok{annual\_returns }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(daily\_returns, }\DecValTok{2}\NormalTok{, mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{*} \DecValTok{252}
+
+\FunctionTok{print}\NormalTok{(annual\_returns)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         ^DJI         AAPL          AXP           BA          CAT         CSCO 
+##  0.049102182  0.123360728 -0.139214932  0.225635983 -0.272829432  0.241013814 
+##          CVX           DD          DIS           GE           GS           HD 
+## -0.203403951  0.004449273  0.281967333  0.203767961  0.039267703  0.302680724 
+##          IBM         INTC          JNJ          JPM           KO          MCD 
+## -0.078815087  0.080829670 -0.013179946  0.125467514  0.082271155  0.247729246 
+##          MMM          MRK         MSFT          NKE          PFE           PG 
+##  0.076478088 -0.005601629  0.219812572  0.394680023  0.199745312 -0.067330018 
+##          TRV          UNH          UTX            V           VZ          WMT 
+##  0.164542731  0.273932024 -0.012581727  0.415225073 -0.012022588 -0.231585254 
+##          XOM 
+## -0.097806252
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Step 4: Extract the index column.}
+\DocumentationTok{\#\# Already did in pre{-}processing.}
+
+\CommentTok{\# Step 5: Compute the covariance matrix of daily returns.}
+\NormalTok{Qts }\OtherTok{\textless{}{-}} \FunctionTok{cov}\NormalTok{(daily\_returns, }\AttributeTok{use =} \StringTok{"pairwise.complete.obs"}\NormalTok{)}
+
+\CommentTok{\# Step 6: Print out the first five rows and columns of the covariance matrix.}
+\FunctionTok{print}\NormalTok{(Qts[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              ^DJI         AAPL          AXP           BA          CAT
+## ^DJI 8.873133e-05 1.010457e-04 7.573449e-05 9.047886e-05 9.436840e-05
+## AAPL 1.010457e-04 2.706878e-04 8.131692e-05 1.278212e-04 1.181664e-04
+## AXP  7.573449e-05 8.131692e-05 1.858309e-04 5.841554e-05 7.909844e-05
+## BA   9.047886e-05 1.278212e-04 5.841554e-05 1.823244e-04 9.310019e-05
+## CAT  9.436840e-05 1.181664e-04 7.909844e-05 9.310019e-05 2.454428e-04
+\end{verbatim}
+
+\end{document}
