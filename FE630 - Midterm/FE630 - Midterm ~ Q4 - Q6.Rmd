@@ -6,20 +6,57 @@ date: "2024-03-26"
 output: pdf_document
 ---
 
-## R Markdown
+#### Question 4. (15 pts)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r}
+library(tidyverse)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Function to read the data
+read_data <- function(file_path) {
+  data <- read_csv(file_path)
+  return(data)
+}
 
-```{r cars}
-summary(cars)
+# Function to calculate simple returns
+calculate_simple_returns <- function(prices) {
+  returns <- prices / lag(prices) - 1
+  returns <- na.omit(returns)  # Remove NA values resulted from lagging
+  return(returns)
+}
+
+# Function to annualize returns
+annualize_returns <- function(returns) {
+  annual_returns <- returns * 252
+  return(annual_returns)
+}
+
+# Function to compute the covariance matrix
+compute_covariance_matrix <- function(returns) {
+  Qts <- cov(returns)
+  return(Qts)
+}
+
+# Set the file path
+file_path <- "Midtermdata/data.csv" # Assuming the file extension is .csv for comma-delimited files
+
+# Step 1: Read in the data
+data <- read_data(file_path)
+
+# Assuming the first column is the date, and the rest are the prices
+dates <- data[[1]] # Extract the first column as dates
+prices <- data[-1] # Remove the first column from the data
+
+# Convert the first column to dates if it's not already
+dates <- as.Date(as.character(dates), format="%Y%m%d")
+
+# Step 2 and 3: Convert to simple returns and annualize
+daily_returns <- calculate_simple_returns(prices)
+annual_returns <- annualize_returns(daily_returns)
+
+# Step 5: Compute the covariance matrix
+Qts <- compute_covariance_matrix(annual_returns)
+
+# Step 6: Print out the first five rows and columns of the covariance matrix
+print(Qts[1:5, 1:5])
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
