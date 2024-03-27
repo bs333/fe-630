@@ -128,12 +128,31 @@ results_df <- do.call(rbind, results)
 colnames(results_df) <- c("Intercept", "Beta", "Sigma_R")
 rownames(results_df) <- names(results)
 
+# Convert results_df into a data frame.
+results_df <- as.data.frame(results_df)
+
 # Step 2. Printing the results table
 print(results_df)
 
 # Step 3: Compute and print the variance of the index's return
 sigma_M_squared <- var(data[,2]) # Assuming the 2nd column is the DJI
 print(sigma_M_squared)
+
+# Step 4. Compute the covariance matrix: Using formula sigma^2_M * Beta_i * Beta_j + delta_ij * sigma^2_Ri
+# Here, delta_ij is the Kronecker delta, which is 1 if i = j and 0 otherwise
+Qts <- matrix(nrow=30, ncol=30)
+
+for(i in 1:nrow(results_df)){
+  for(j in 1:nrow(results_df)){
+    if(i == j){
+      # Diagonal elements represent the variance for each security
+      Qts[i,j] <- sigma_M_squared * (results_df$Beta[i]^2) + (results_df$Sigma_R[i]^2)
+    } else {
+      # Off-diagonal elements represent the covariances between securities
+      Qts[i,j] <- sigma_M_squared * results_df$Beta[i] * results_df$Beta[j]
+    }
+  }
+}
 ```
 
 
