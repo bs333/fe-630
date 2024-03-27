@@ -241,4 +241,19 @@ port <- function(mu, Q, tau) {
 }
 ```
 
+```{r}
+loadInputs <- function() {
+  load("inputs_mu.RData")
+  load("inputs_Q.RData")
+  return(list(mu = mu, Q = Q))
+}
+
+computeMetrics <- function(mu, Q, h) {
+  expectedReturn <- sum(mu * h)
+  stdDev <- sqrt(t(h) %*% Q %*% h)
+  return(list(expectedReturn = expectedReturn, stdDev = stdDev))
+}
+```
+
+
 
