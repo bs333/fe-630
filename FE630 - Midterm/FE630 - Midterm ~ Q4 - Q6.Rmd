@@ -105,4 +105,23 @@ Qts <- cov(daily_returns, use = "pairwise.complete.obs")
 print(Qts[1:5, 1:5])
 ```
 
+#### Question 5. (20 pts)
+
+```{r}
+# 1. Pre-process the Data: Already done, moving to regression
+
+# 2. Conduct the regressional analysis
+results <- list() # To store regression results
+
+for(i in 3:ncol(data)){
+  # Using backticks to handle special characters in column names
+  formula <- as.formula(paste("`", colnames(data)[i], "` ~ `", colnames(data)[2], "`", sep = ""))
+  reg <- lm(formula, data = data)
+  alpha_i <- coef(reg)[1] # Intercept
+  beta_i <- coef(reg)[2] # Slope
+  sigma_R_i <- sd(residuals(reg)) # Standard deviation of residuals
+  results[[colnames(data)[i]]] <- c(alpha_i, beta_i, sigma_R_i)
+}
+```
+
 
