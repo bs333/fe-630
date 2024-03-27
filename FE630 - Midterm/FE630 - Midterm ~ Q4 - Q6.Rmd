@@ -51,7 +51,7 @@ compute_covariance_matrix <- function(returns) {
 }
 ```
 
-#### Pre-Processing
+##### Pre-Processing
 
 ```{r}
 # Step 1: Read in the data
@@ -160,4 +160,54 @@ for(i in 1:nrow(results_df)){
 print(Qts[1:5, 1:5])
 ```
 
+#### Question 6. (20 pts)
+
+```{r}
+processData <- function(data_dir = "data") {
+  # Initialize lists to store price data and names
+  price_data <- list()
+  names <- c()
+  
+  # List files in the specified directory
+  files <- list.files(data_dir, full.names = TRUE)
+  
+  for (file in files) {
+    if (grepl("\\.txt$", file)) {
+      # Read data assuming space-separated values without an explicit header
+      df <- read.csv(file, sep = " ", header = FALSE)
+      colnames(df) <- c("Date", "Open", "Close", "High", "Low", "Volume", "AdjClose")
+      
+      # Convert Date to Date class and set as row names
+      df$Date <- as.Date(as.character(df$Date), format = "%Y%m%d")
+      df <- df[order(df$Date), ]
+      rownames(df) <- df$Date
+      
+      # Append adjusted close price to the list
+      name <- tools::file_path_sans_ext(basename(file))
+      price_data[[name]] <- df$AdjClose
+      names <- c(names, name)
+    }
+  }
+  
+  # Combine all adjusted close prices into one data.frame
+  P <- do.call(cbind, price_data)
+  colnames(P) <- names
+  P <- na.omit(P)
+  
+  # Calculate daily returns
+  R <- diff(log(P))
+  
+  # Compute vector of average daily returns
+  mu <- colMeans(R)
+  
+  # Compute covariance matrix of the return matrix
+  Q <- cov(R)
+  
+  # Save results
+  save(mu, file = "inputs_mu.RData")
+  save(Q, file = "inputs_Q.RData")
+}
+
+processData()
+```
 
