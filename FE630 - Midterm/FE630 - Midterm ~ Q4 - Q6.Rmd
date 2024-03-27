@@ -228,16 +228,21 @@ port <- function(mu, Q, tau) {
   A <- matrix(1, ncol = n)
   b <- 1
   
-  # Inequality constraints (0 <= h <= 0.1)
+  # Inequality constraints (0 <= h_i <= 0.1)
   Amat <- cbind(diag(n), -diag(n))
   bvec <- c(rep(0.1, n), rep(0, n))
   
   # Solve the quadratic programming problem
-  sol <- solve.QP(Dmat, dvec, Amat, bvec, meq = 1)
+  sol <- solve.QP(Dmat, dvec, t(A), b, meq = 1)
   
   # Optimized portfolio weights
   h <- sol$solution
-  return(h)
+  
+  # Calculate utility explicitly
+  utility <- -0.5 * sum(Dmat * (h %*% t(h))) + tau * sum(dvec * h)
+  
+  # Return both optimized weights and utility
+  return(list(weights = h, utility = utility))
 }
 ```
 
@@ -248,12 +253,60 @@ loadInputs <- function() {
   return(list(mu = mu, Q = Q))
 }
 
+inputs <- loadInputs()
+
+mu <- inputs$mu
+Q <- inputs$Q
+
 computeMetrics <- function(mu, Q, h) {
+  # Ensure h is a numeric vector
+  h <- as.numeric(h)
+  
+  # Compute expected return
   expectedReturn <- sum(mu * h)
-  stdDev <- sqrt(t(h) %*% Q %*% h)
-  return(list(expectedReturn = expectedReturn, stdDev = stdDev))
+  
+  # Compute standard deviation of the portfolio
+  stdDev <- sqrt(sum((h %*% Q) * h))
+  
+  # Return a list with expected return and standard deviation
+  list(expectedReturn = expectedReturn, stdDev = stdDev)
 }
+
 ```
+
+```{r}
+plotFrontier <- function() {
+  inputs <- loadInputs()
+  mu <- inputs$mu
+  Q <- inputs$Q
+  
+  # Range of tau values should be the same as in Python
+  tau_values <- seq(0, 0.5, by = 0.01)
+  
+  # Initialize vectors to store returns and standard deviations
+  returns <- numeric(length(tau_values))
+  std_devs <- numeric(length(tau_values))
+  
+  # Loop through tau values and compute the optimized portfolio for each
+  for (i in seq_along(tau_values)) {
+    tau <- tau_values[i]
+    # Use the 'port' function to get the portfolio weights
+    port_result <- port(mu, Q, tau)
+    h <- port_result$weights
+    
+    # Compute expected return and standard deviation
+    metrics <- computeMetrics(mu, Q, h)
+    returns[i] <- metrics$expectedReturn
+    std_devs[i] <- metrics$stdDev
+  }
+  
+  # Plot the efficient frontier
+  plot(std_devs, returns, type = "l", xlab = "Standard Deviation of Portfolio Return", ylab = "Expected Portfolio Return", main = "Efficient Frontier", xlim=c(0.00675, 0.0085), ylim=c(0.0003, 0.0009))
+}
+
+plotFrontier()
+```
+
 
 
 
