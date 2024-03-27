@@ -162,6 +162,8 @@ print(Qts[1:5, 1:5])
 
 #### Question 6. (20 pts)
 
+##### Previous Functions
+
 ```{r}
 processData <- function(data_dir = "data") {
   # Initialize lists to store price data and names
@@ -210,4 +212,33 @@ processData <- function(data_dir = "data") {
 
 processData()
 ```
+
+```{r}
+library(quadprog)
+
+port <- function(mu, Q, tau) {
+  # Number of securities
+  n <- length(mu)
+  
+  # Define Dmat and dvec for the quadprog function
+  Dmat <- 2 * Q
+  dvec <- -tau * mu
+  
+  # Equality constraint (sum(h) = 1)
+  A <- matrix(1, ncol = n)
+  b <- 1
+  
+  # Inequality constraints (0 <= h <= 0.1)
+  Amat <- cbind(diag(n), -diag(n))
+  bvec <- c(rep(0.1, n), rep(0, n))
+  
+  # Solve the quadratic programming problem
+  sol <- solve.QP(Dmat, dvec, Amat, bvec, meq = 1)
+  
+  # Optimized portfolio weights
+  h <- sol$solution
+  return(h)
+}
+```
+
 
