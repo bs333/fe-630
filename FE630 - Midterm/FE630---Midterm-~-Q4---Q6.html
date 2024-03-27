@@ -1799,6 +1799,125 @@ print(Qts[1:5, 1:5])</code></pre>
 ## BA   9.047886e-05 1.278212e-04 5.841554e-05 1.823244e-04 9.310019e-05
 ## CAT  9.436840e-05 1.181664e-04 7.909844e-05 9.310019e-05 2.454428e-04</code></pre>
 </div>
+<div id="question-5.-20-pts" class="section level4">
+<h4>Question 5. (20 pts)</h4>
+<pre class="r"><code># 0. Pre-process the Data: Already done, moving to regression
+
+# Step 1. Conduct the regressional analysis
+results &lt;- list() # To store regression results
+
+for(i in 3:ncol(data)){
+  # Using backticks to handle special characters in column names
+  formula &lt;- as.formula(paste(&quot;`&quot;, colnames(data)[i], &quot;` ~ `&quot;, colnames(data)[2], &quot;`&quot;, sep = &quot;&quot;))
+  reg &lt;- lm(formula, data = data)
+  alpha_i &lt;- coef(reg)[1] # Intercept
+  beta_i &lt;- coef(reg)[2] # Slope
+  sigma_R_i &lt;- sd(residuals(reg)) # Standard deviation of residuals
+  results[[colnames(data)[i]]] &lt;- c(alpha_i, beta_i, sigma_R_i)
+}
+
+# Step 2. Creating a data frame from the results list for better visualization
+results_df &lt;- do.call(rbind, results)
+colnames(results_df) &lt;- c(&quot;Intercept&quot;, &quot;Beta&quot;, &quot;Sigma_R&quot;)
+rownames(results_df) &lt;- names(results)
+
+print(results_df)</code></pre>
+<pre><code>##        Intercept          Beta   Sigma_R
+## AAPL  -44.113438  0.0092603548 5.9559090
+## AXP    26.954988  0.0030676210 5.1682927
+## BA     -2.069516  0.0080176033 7.9228769
+## CAT   -57.771249  0.0079356594 6.7220955
+## CSCO    1.308190  0.0014745322 0.9932658
+## CVX  -163.948667  0.0149088567 7.0677293
+## DD   -123.711973  0.0106266070 4.3608027
+## DIS    40.224863  0.0035978044 8.4461406
+## GE     13.754330  0.0006716579 1.2838192
+## GS     10.463861  0.0103470463 9.2050610
+## HD    158.959614 -0.0027874917 7.2751732
+## IBM   -35.685778  0.0109893315 4.5309059
+## INTC   -2.378091  0.0019549064 2.2268284
+## JNJ    33.855770  0.0037188064 2.6888608
+## JPM    42.582072  0.0011015650 3.7680066
+## KO     26.414590  0.0008046107 1.0557201
+## MCD   110.504144 -0.0008779753 3.9126782
+## MMM   -44.856342  0.0113798013 3.7119309
+## MRK    -6.222425  0.0035744999 1.9765850
+## MSFT   34.345438  0.0006028535 2.3818999
+## NKE   251.852456 -0.0084191331 9.0603493
+## PFE    17.980153  0.0008492355 1.6345089
+## PG    -31.305411  0.0063229560 4.4014649
+## TRV    68.210986  0.0019608476 2.9911744
+## UNH   122.943990 -0.0005916892 8.9702680
+## UTX  -155.186100  0.0149959961 4.9281090
+## V      93.184150 -0.0014373705 3.8318563
+## VZ     11.334647  0.0019956060 1.1132384
+## WMT   -70.942748  0.0083456221 5.8924571
+## XOM   -41.291564  0.0071211814 4.2129147</code></pre>
+<pre class="r"><code># Convert results_df into a data frame.
+results_df &lt;- as.data.frame(results_df)
+
+# Step 2. Printing the results table
+print(results_df)</code></pre>
+<pre><code>##        Intercept          Beta   Sigma_R
+## AAPL  -44.113438  0.0092603548 5.9559090
+## AXP    26.954988  0.0030676210 5.1682927
+## BA     -2.069516  0.0080176033 7.9228769
+## CAT   -57.771249  0.0079356594 6.7220955
+## CSCO    1.308190  0.0014745322 0.9932658
+## CVX  -163.948667  0.0149088567 7.0677293
+## DD   -123.711973  0.0106266070 4.3608027
+## DIS    40.224863  0.0035978044 8.4461406
+## GE     13.754330  0.0006716579 1.2838192
+## GS     10.463861  0.0103470463 9.2050610
+## HD    158.959614 -0.0027874917 7.2751732
+## IBM   -35.685778  0.0109893315 4.5309059
+## INTC   -2.378091  0.0019549064 2.2268284
+## JNJ    33.855770  0.0037188064 2.6888608
+## JPM    42.582072  0.0011015650 3.7680066
+## KO     26.414590  0.0008046107 1.0557201
+## MCD   110.504144 -0.0008779753 3.9126782
+## MMM   -44.856342  0.0113798013 3.7119309
+## MRK    -6.222425  0.0035744999 1.9765850
+## MSFT   34.345438  0.0006028535 2.3818999
+## NKE   251.852456 -0.0084191331 9.0603493
+## PFE    17.980153  0.0008492355 1.6345089
+## PG    -31.305411  0.0063229560 4.4014649
+## TRV    68.210986  0.0019608476 2.9911744
+## UNH   122.943990 -0.0005916892 8.9702680
+## UTX  -155.186100  0.0149959961 4.9281090
+## V      93.184150 -0.0014373705 3.8318563
+## VZ     11.334647  0.0019956060 1.1132384
+## WMT   -70.942748  0.0083456221 5.8924571
+## XOM   -41.291564  0.0071211814 4.2129147</code></pre>
+<pre class="r"><code># Step 3: Compute and print the variance of the index&#39;s return
+sigma_M_squared &lt;- var(data[,2]) # Assuming the 2nd column is the DJI
+print(sigma_M_squared)</code></pre>
+<pre><code>## [1] 316354.9</code></pre>
+<pre class="r"><code># Step 4. Compute the covariance matrix: Using formula sigma^2_M * Beta_i * Beta_j + delta_ij * sigma^2_Ri
+## Here, delta_ij is the Kronecker delta, which is 1 if i = j and 0 otherwise
+Qts &lt;- matrix(nrow=30, ncol=30)
+
+for(i in 1:nrow(results_df)){
+  for(j in 1:nrow(results_df)){
+    if(i == j){
+      # Diagonal elements represent the variance for each security
+      Qts[i,j] &lt;- sigma_M_squared * (results_df$Beta[i]^2) + (results_df$Sigma_R[i]^2)
+    } else {
+      # Off-diagonal elements represent the covariances between securities
+      Qts[i,j] &lt;- sigma_M_squared * results_df$Beta[i] * results_df$Beta[j]
+    }
+  }
+}
+
+# 5. Print the first five rows and columns of the covariance matrix.
+print(Qts[1:5, 1:5])</code></pre>
+<pre><code>##           [,1]      [,2]      [,3]      [,4]     [,5]
+## [1,] 62.601606  8.986776 23.488040 23.247980 4.319729
+## [2,]  8.986776 29.688244  7.780739  7.701216 1.430970
+## [3,] 23.488040  7.780739 83.107894 20.128072 3.740016
+## [4,] 23.247980  7.701216 20.128072 65.108921 3.701791
+## [5,]  4.319729  1.430970  3.740016  3.701791 1.674410</code></pre>
+</div>
 
 
 

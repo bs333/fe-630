@@ -128,6 +128,8 @@ results_df <- do.call(rbind, results)
 colnames(results_df) <- c("Intercept", "Beta", "Sigma_R")
 rownames(results_df) <- names(results)
 
+print(results_df)
+
 # Convert results_df into a data frame.
 results_df <- as.data.frame(results_df)
 
