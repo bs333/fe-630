@@ -122,6 +122,14 @@ for(i in 3:ncol(data)){
   sigma_R_i <- sd(residuals(reg)) # Standard deviation of residuals
   results[[colnames(data)[i]]] <- c(alpha_i, beta_i, sigma_R_i)
 }
+
+# Creating a data frame from the results list for better visualization
+results_df <- do.call(rbind, results)
+colnames(results_df) <- c("Intercept", "Beta", "Sigma_R")
+rownames(results_df) <- names(results)
+
+# Printing the results table
+print(results_df)
 ```
 
 
