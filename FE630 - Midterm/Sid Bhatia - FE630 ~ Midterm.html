@@ -7596,12 +7596,12 @@ a.anchor-link {
     <span class="c1"># Calculate the vector of average daily returns for each company.</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mu</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
     <span class="c1"># Calculate the covariance matrix of the daily returns.</span>
     <span class="n">Q</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
     <span class="c1"># Save the vector of average daily returns and the covariance matrix as binary files.</span>
     <span class="n">mu</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">'inputs_mu.pkl'</span><span class="p">)</span>
@@ -7625,31 +7625,6 @@ Adj Close    0.000473
 Adj Close    0.000945
 Adj Close    0.000540
 Adj Close   -0.000340
-Adj Close    0.000563
-Adj Close   -0.000295
-Adj Close    0.000339
-Adj Close    0.001099
-Adj Close    0.000425
-Adj Close    0.001033
-Adj Close    0.001010
-Adj Close   -0.000270
-Adj Close    0.000669
-Adj Close    0.000521
-Adj Close    0.000637
-Adj Close    0.000240
-Adj Close    0.000290
-Adj Close    0.000705
-Adj Close    0.000468
-Adj Close    0.000901
-Adj Close    0.000491
-Adj Close    0.000233
-Adj Close    0.000139
-Adj Close    0.000595
-Adj Close    0.001255
-Adj Close    0.000200
-Adj Close    0.000226
-Adj Close    0.000022
-Adj Close   -0.000107
 dtype: float64
            Adj Close  Adj Close  Adj Close  Adj Close  Adj Close  Adj Close   
 Adj Close   0.000342   0.000079   0.000080   0.000097   0.000104   0.000069  \
@@ -7657,31 +7632,6 @@ Adj Close   0.000079   0.000144   0.000066   0.000088   0.000062   0.000051
 Adj Close   0.000080   0.000066   0.000169   0.000076   0.000058   0.000056   
 Adj Close   0.000097   0.000088   0.000076   0.000215   0.000075   0.000073   
 Adj Close   0.000104   0.000062   0.000058   0.000075   0.000166   0.000059   
-Adj Close   0.000069   0.000051   0.000056   0.000073   0.000059   0.000190   
-Adj Close   0.000100   0.000056   0.000050   0.000074   0.000077   0.000054   
-Adj Close   0.000084   0.000060   0.000058   0.000073   0.000061   0.000058   
-Adj Close   0.000075   0.000071   0.000066   0.000080   0.000055   0.000059   
-Adj Close   0.000076   0.000063   0.000062   0.000074   0.000077   0.000062   
-Adj Close   0.000058   0.000062   0.000057   0.000069   0.000050   0.000047   
-Adj Close   0.000103   0.000057   0.000066   0.000079   0.000076   0.000088   
-Adj Close   0.000064   0.000041   0.000050   0.000059   0.000053   0.000065   
-Adj Close   0.000088   0.000063   0.000059   0.000069   0.000068   0.000076   
-Adj Close   0.000047   0.000057   0.000053   0.000051   0.000045   0.000045   
-Adj Close   0.000083   0.000083   0.000071   0.000136   0.000072   0.000071   
-Adj Close   0.000039   0.000044   0.000037   0.000038   0.000027   0.000035   
-Adj Close   0.000046   0.000041   0.000043   0.000044   0.000041   0.000039   
-Adj Close   0.000076   0.000065   0.000066   0.000070   0.000064   0.000061   
-Adj Close   0.000046   0.000053   0.000047   0.000048   0.000044   0.000052   
-Adj Close   0.000076   0.000063   0.000056   0.000071   0.000071   0.000077   
-Adj Close   0.000055   0.000055   0.000046   0.000055   0.000043   0.000048   
-Adj Close   0.000037   0.000043   0.000037   0.000039   0.000030   0.000039   
-Adj Close   0.000052   0.000043   0.000034   0.000040   0.000043   0.000040   
-Adj Close   0.000054   0.000055   0.000049   0.000069   0.000047   0.000045   
-Adj Close   0.000072   0.000052   0.000062   0.000079   0.000053   0.000058   
-Adj Close   0.000073   0.000068   0.000078   0.000072   0.000068   0.000059   
-Adj Close   0.000050   0.000052   0.000041   0.000040   0.000040   0.000034   
-Adj Close   0.000044   0.000041   0.000039   0.000041   0.000031   0.000034   
-Adj Close   0.000089   0.000053   0.000049   0.000066   0.000072   0.000051   
 
            Adj Close  Adj Close  Adj Close  Adj Close  ...  Adj Close   
 Adj Close   0.000100   0.000084   0.000075   0.000076  ...   0.000076  \
@@ -7689,31 +7639,6 @@ Adj Close   0.000056   0.000060   0.000071   0.000063  ...   0.000063
 Adj Close   0.000050   0.000058   0.000066   0.000062  ...   0.000056   
 Adj Close   0.000074   0.000073   0.000080   0.000074  ...   0.000071   
 Adj Close   0.000077   0.000061   0.000055   0.000077  ...   0.000071   
-Adj Close   0.000054   0.000058   0.000059   0.000062  ...   0.000077   
-Adj Close   0.000141   0.000060   0.000053   0.000068  ...   0.000062   
-Adj Close   0.000060   0.000132   0.000064   0.000062  ...   0.000065   
-Adj Close   0.000053   0.000064   0.000148   0.000058  ...   0.000067   
-Adj Close   0.000068   0.000062   0.000058   0.000130  ...   0.000057   
-Adj Close   0.000049   0.000053   0.000066   0.000052  ...   0.000061   
-Adj Close   0.000068   0.000065   0.000049   0.000060  ...   0.000082   
-Adj Close   0.000053   0.000052   0.000050   0.000061  ...   0.000068   
-Adj Close   0.000061   0.000057   0.000060   0.000063  ...   0.000098   
-Adj Close   0.000047   0.000050   0.000052   0.000052  ...   0.000049   
-Adj Close   0.000075   0.000071   0.000073   0.000074  ...   0.000077   
-Adj Close   0.000037   0.000036   0.000044   0.000038  ...   0.000040   
-Adj Close   0.000037   0.000038   0.000044   0.000047  ...   0.000048   
-Adj Close   0.000056   0.000059   0.000061   0.000066  ...   0.000059   
-Adj Close   0.000052   0.000048   0.000046   0.000045  ...   0.000051   
-Adj Close   0.000062   0.000065   0.000067   0.000057  ...   0.000228   
-Adj Close   0.000050   0.000048   0.000058   0.000058  ...   0.000048   
-Adj Close   0.000043   0.000036   0.000045   0.000042  ...   0.000044   
-Adj Close   0.000038   0.000038   0.000043   0.000043  ...   0.000046   
-Adj Close   0.000049   0.000053   0.000059   0.000054  ...   0.000051   
-Adj Close   0.000059   0.000053   0.000063   0.000060  ...   0.000061   
-Adj Close   0.000057   0.000059   0.000068   0.000066  ...   0.000057   
-Adj Close   0.000039   0.000044   0.000044   0.000044  ...   0.000052   
-Adj Close   0.000030   0.000038   0.000042   0.000037  ...   0.000046   
-Adj Close   0.000101   0.000059   0.000054   0.000064  ...   0.000057   
 
            Adj Close  Adj Close  Adj Close  Adj Close  Adj Close  Adj Close   
 Adj Close   0.000055   0.000037   0.000052   0.000054   0.000072   0.000073  \
@@ -7721,31 +7646,6 @@ Adj Close   0.000055   0.000043   0.000043   0.000055   0.000052   0.000068
 Adj Close   0.000046   0.000037   0.000034   0.000049   0.000062   0.000078   
 Adj Close   0.000055   0.000039   0.000040   0.000069   0.000079   0.000072   
 Adj Close   0.000043   0.000030   0.000043   0.000047   0.000053   0.000068   
-Adj Close   0.000048   0.000039   0.000040   0.000045   0.000058   0.000059   
-Adj Close   0.000050   0.000043   0.000038   0.000049   0.000059   0.000057   
-Adj Close   0.000048   0.000036   0.000038   0.000053   0.000053   0.000059   
-Adj Close   0.000058   0.000045   0.000043   0.000059   0.000063   0.000068   
-Adj Close   0.000058   0.000042   0.000043   0.000054   0.000060   0.000066   
-Adj Close   0.000053   0.000041   0.000038   0.000050   0.000057   0.000056   
-Adj Close   0.000043   0.000029   0.000039   0.000047   0.000056   0.000057   
-Adj Close   0.000041   0.000036   0.000041   0.000047   0.000062   0.000060   
-Adj Close   0.000056   0.000039   0.000045   0.000044   0.000049   0.000055   
-Adj Close   0.000057   0.000045   0.000038   0.000046   0.000059   0.000054   
-Adj Close   0.000063   0.000044   0.000049   0.000067   0.000075   0.000070   
-Adj Close   0.000039   0.000046   0.000033   0.000039   0.000036   0.000039   
-Adj Close   0.000037   0.000034   0.000031   0.000039   0.000040   0.000036   
-Adj Close   0.000050   0.000043   0.000039   0.000053   0.000058   0.000067   
-Adj Close   0.000065   0.000041   0.000039   0.000041   0.000052   0.000047   
-Adj Close   0.000048   0.000044   0.000046   0.000051   0.000061   0.000057   
-Adj Close   0.000110   0.000044   0.000039   0.000047   0.000059   0.000050   
-Adj Close   0.000044   0.000085   0.000038   0.000044   0.000042   0.000040   
-Adj Close   0.000039   0.000038   0.000088   0.000036   0.000035   0.000041   
-Adj Close   0.000047   0.000044   0.000036   0.000086   0.000053   0.000054   
-Adj Close   0.000059   0.000042   0.000035   0.000053   0.000179   0.000064   
-Adj Close   0.000050   0.000040   0.000041   0.000054   0.000064   0.000110   
-Adj Close   0.000042   0.000037   0.000065   0.000036   0.000030   0.000043   
-Adj Close   0.000038   0.000043   0.000035   0.000041   0.000045   0.000037   
-Adj Close   0.000048   0.000042   0.000041   0.000047   0.000056   0.000055   
 
            Adj Close  Adj Close  Adj Close  
 Adj Close   0.000050   0.000044   0.000089  
@@ -7753,33 +7653,8 @@ Adj Close   0.000052   0.000041   0.000053
 Adj Close   0.000041   0.000039   0.000049  
 Adj Close   0.000040   0.000041   0.000066  
 Adj Close   0.000040   0.000031   0.000072  
-Adj Close   0.000034   0.000034   0.000051  
-Adj Close   0.000039   0.000030   0.000101  
-Adj Close   0.000044   0.000038   0.000059  
-Adj Close   0.000044   0.000042   0.000054  
-Adj Close   0.000044   0.000037   0.000064  
-Adj Close   0.000040   0.000048   0.000051  
-Adj Close   0.000042   0.000034   0.000060  
-Adj Close   0.000040   0.000034   0.000052  
-Adj Close   0.000046   0.000035   0.000060  
-Adj Close   0.000041   0.000041   0.000047  
-Adj Close   0.000050   0.000044   0.000070  
-Adj Close   0.000035   0.000036   0.000035  
-Adj Close   0.000032   0.000033   0.000038  
-Adj Close   0.000041   0.000038   0.000058  
-Adj Close   0.000043   0.000036   0.000047  
-Adj Close   0.000052   0.000046   0.000057  
-Adj Close   0.000042   0.000038   0.000048  
-Adj Close   0.000037   0.000043   0.000042  
-Adj Close   0.000065   0.000035   0.000041  
-Adj Close   0.000036   0.000041   0.000047  
-Adj Close   0.000030   0.000045   0.000056  
-Adj Close   0.000043   0.000037   0.000055  
-Adj Close   0.000100   0.000034   0.000040  
-Adj Close   0.000034   0.000084   0.000032  
-Adj Close   0.000040   0.000032   0.000112  
 
-[30 rows x 30 columns]
+[5 rows x 30 columns]
 </pre>
 </div>
 </div>
@@ -8668,7 +8543,18 @@ CAT   0.000094  0.000118  0.000079  0.000093  0.000245
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Implementation-in-R">Implementation in R<a class="anchor-link" href="#Implementation-in-R">¶</a></h5><p>Below is the implementation in R, which I advise you to <strong>not consider</strong> as that was before I could fix the Python bugs. <strong>Please use the Python results.</strong></p>
+<h5 id="Implementation-in-R">Implementation in R<a class="anchor-link" href="#Implementation-in-R">¶</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Below is the implementation in R, which I advise you to <strong>not consider</strong> as that was before I could fix the Python bugs. <strong>Please use the Python results.</strong></p>
 </div>
 </div>
 </div>
