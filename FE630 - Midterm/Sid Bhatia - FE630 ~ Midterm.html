@@ -8661,22 +8661,19 @@ CSCO  0.000107   0.00008  0.000096    0.0001  0.000198
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">frontier_qts</span><span class="p">():</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">frontier_g</span><span class="p">(</span><span class="n">mu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Q</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">tau_range</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Plots the efficient frontier by optimizing portfolios over a range of risk tolerance values using the `port` function.</span>
 <span class="sd">    Loads mean returns vector and covariance matrix, then calculates and plots the efficient frontier.</span>
 <span class="sd">    """</span>
-    <span class="c1"># Load the mean returns vector and covariance matrix from saved files.</span>
-    <span class="n">mu</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="n">load_inputs</span><span class="p">()</span>
-    <span class="n">TAU</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.501</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>  <span class="c1"># Range of risk tolerance values</span>
     <span class="n">returns</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List to store expected returns of optimized portfolios</span>
     <span class="n">std_devs</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List to store standard deviations of optimized portfolios</span>
 
-    <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">TAU</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">tau_range</span><span class="p">:</span>
         <span class="c1"># Use the previously defined port() function for portfolio optimization.</span>
-        <span class="n">h_opt</span> <span class="o">=</span> <span class="n">port</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Qts</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+        <span class="n">h_opt</span> <span class="o">=</span> <span class="n">port</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
         <span class="c1"># Compute expected return and standard deviation for the optimized portfolio.</span>
-        <span class="n">ret</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Qts</span><span class="p">,</span> <span class="n">h_opt</span><span class="p">)</span>
+        <span class="n">ret</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">h_opt</span><span class="p">)</span>
         <span class="c1"># Store the results.</span>
         <span class="n">returns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
         <span class="n">std_devs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>
@@ -8690,7 +8687,12 @@ CSCO  0.000107   0.00008  0.000096    0.0001  0.000198
     <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="n">frontier_qts</span><span class="p">()</span>
+<span class="c1"># Load the mean returns vector from the saved .pkl file.</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">load_inputs</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">tau_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.501</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>  <span class="c1"># Range of risk tolerance values</span>
+
+<span class="c1"># Step 1: Plot the efficient frontier for Qts or time series approximation for covariance matrix.</span>
+<span class="n">frontier_g</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">Qts</span><span class="p">,</span> <span class="n">tau_range</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
