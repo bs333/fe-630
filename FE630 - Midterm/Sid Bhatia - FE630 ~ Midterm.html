@@ -8447,18 +8447,20 @@ Return of the Index. The securities variance and covariances are specified by</p
 
     <span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'Intercept'</span><span class="p">,</span> <span class="s1">'Beta'</span><span class="p">,</span> <span class="s1">'Sigma_R'</span><span class="p">])</span>
 
-    <span class="c1"># Loop through securities and regress each against the index.</span>
+    <span class="c1"># Step 1: Loop through securities and regress each against the index.</span>
     <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">annual_returns</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>  <span class="c1"># Skip Dow Jones column</span>
         <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">sigma_r</span> <span class="o">=</span> <span class="n">perform_regression</span><span class="p">(</span><span class="n">index_returns</span><span class="p">,</span> <span class="n">annual_returns</span><span class="p">[</span><span class="n">column</span><span class="p">])</span>
         <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">sigma_r</span><span class="p">]</span>
 
+    <span class="c1"># Step 2: Print the table of table of intercepts, slopes, &amp; idiosyncratic standard deviations.</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Intercepts, Betas, and Idiosyncratic Standard Deviations:"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 
+    <span class="c1"># Step 3: Compute and print the variance of the index’s return.</span>
     <span class="n">sigma_M_squared</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">index_returns</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Variance of the Index's Return: </span><span class="si">{</span><span class="n">sigma_M_squared</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-    <span class="c1">## Compute single-index approximation to the covariance matrix: </span>
+    <span class="c1">## Step 4: Compute single-index approximation to the covariance matrix:</span>
 
     <span class="c1"># Create an empty DataFrame to store the covariance matrix Qsi.</span>
     <span class="n">Qsi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="n">annual_returns</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">annual_returns</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
@@ -8470,6 +8472,7 @@ Return of the Index. The securities variance and covariances are specified by</p
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">Qsi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">'Beta'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">results</span><span class="p">[</span><span class="s1">'Beta'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">sigma_M_squared</span>
 
+    <span class="c1"># Step 5: Print the first five rows and columns of this covariance matrix.</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Single-Index Approximation Covariance Matrix (First 5 Rows and Columns):"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">Qsi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">])</span>
 
