@@ -7547,12 +7547,33 @@ a.anchor-link {
 <p>Consider the optimization problem <strong>Max Expected Return w/Target Risk</strong>:</p>
 <p>$$
 \begin{cases}
-\underset{\omega_1, \omega_2}{\max} &amp; R_P (\omega_1, \omega_2) = \mu_1 \omega_1 + \mu_2 \omega_2 \tag{1} \\
+\underset{\omega_1, \omega_2}{\max} &amp; R_p (\omega_1, \omega_2) = \mu_1 \omega_1 + \mu_2 \omega_2 \tag{1} \\
 \text{s.t.} &amp; \sqrt{\sigma_1^2 \omega_1^2 + 2 \rho_{1, 2} \sigma_1 \sigma_2 \omega_1 \omega_2 + \sigma_2^2 \omega_2^2} = \sigma_T \\
 &amp; \omega_1 + \omega_2 = 1
 \end{cases}
 $$</p>
 <p>where we have two securities with <strong>Expected Returns</strong> $ \mu_1 $ and $ \mu_2 $ for the column vector $ (\mu_1, \mu_2)^\intercal \in \mathbb{R}^{2 \times 1} $, <strong>volatilities</strong> $ (\sigma_1, \sigma_2) \in \mathbb{R}^{+} $, and <strong>Pearson correlation coefficient</strong> $ \rho_{1, 2} \in [-1, 1] $. Additionally, $ \sigma_T \in \mathbb{R}^+ $ denotes the <strong>target risk/vol</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol>
+<li><p>Solve the <em>problem (3)</em> using a <strong>Lagrangian approach</strong>. You will denote the solution (the <em><strong>optimal solution</strong></em>) by $\omega^*(\sigma_T)$ and the <em><strong>optimal value</strong></em> of the problem by $R_p(\omega_1^*(\sigma_T), \omega_2^*(\sigma_T))$ by $R_p(\sigma_T)$.</p>
+</li>
+<li><p>Assume that $\mu_1 = 5\%$, $\mu_2 = 10\%$, $\sigma_1 = 10\%$, $\sigma_2 = 20\%$, and $\rho_{1,2} = -0.5$ (moderate negative correlation).</p>
+</li>
+</ol>
+<ul>
+<li>Consider a sequence of successive values of $\sigma_T$ in the range $[2\%, 30\%]$ by step of $0.5\%$</li>
+<li>Plot the efficient frontier: namely, the graph from the <em>mapping</em> $\sigma_T \mapsto R_p(\sigma_T)$.</li>
+</ul>
+<p>The (aforementioned) graph maps the sequence of values of $\sigma_T$ from the $x$-axis into the sequence of values $R_p(\sigma_T)$ on the $y$-axis.</p>
 </div>
 </div>
 </div>
