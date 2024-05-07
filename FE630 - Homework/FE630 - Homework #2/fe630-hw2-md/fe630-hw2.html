@@ -7547,13 +7547,12 @@ a.anchor-link {
 <p>Consider the optimization problem <strong>Max Expected Return w/Target Risk</strong>:</p>
 <p>$$
 \begin{cases}
-\underset{\omega_1 \omega_2} \max &amp; R_P (\omega_1, \omega_2) = \mu_1 \omega_1 + \mu_2 \omega_2 \tag{1}
-\\
-\text{s.t.} &amp; \sqrt{\sigma_1^2 \omega_1^2 + 2\rho_{1, 2} \cdot \sigma_1 \sigma_2 + \sigma_2^2 \omega_2^2} = \sigma_T
-\\
+\underset{\omega_1, \omega_2}{\max} &amp; R_P (\omega_1, \omega_2) = \mu_1 \omega_1 + \mu_2 \omega_2 \tag{1} \\
+\text{s.t.} &amp; \sqrt{\sigma_1^2 \omega_1^2 + 2 \rho_{1, 2} \sigma_1 \sigma_2 \omega_1 \omega_2 + \sigma_2^2 \omega_2^2} = \sigma_T \\
 &amp; \omega_1 + \omega_2 = 1
 \end{cases}
 $$</p>
+<p>where we have two securities with <strong>Expected Returns</strong> $ \mu_1 $ and $ \mu_2 $ for the column vector $ (\mu_1, \mu_2)^\intercal \in \mathbb{R}^{2 \times 1} $, <strong>volatilities</strong> $ (\sigma_1, \sigma_2) \in \mathbb{R}^{+} $, and <strong>Pearson correlation coefficient</strong> $ \rho_{1, 2} \in [-1, 1] $. Additionally, $ \sigma_T \in \mathbb{R}^+ $ denotes the <strong>target risk/vol</strong>.</p>
 </div>
 </div>
 </div>
