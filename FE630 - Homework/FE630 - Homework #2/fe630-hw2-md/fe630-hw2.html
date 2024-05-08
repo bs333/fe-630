@@ -8251,6 +8251,93 @@ Minimum Variance of Portfolio P2: 0.006409901313492481
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="3.3-Two-Fund-Theorem-(5-pts)">3.3 Two-Fund Theorem (5 pts)<a class="anchor-link" href="#3.3-Two-Fund-Theorem-(5-pts)">¶</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Using the Portfolios $(P_1)$ and $(P_2)$ we previously found, apply the Two-Fund Theorem to find the <strong>Minimum Variance Portfolio</strong> with Expected Return equal to $4\%$.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The Two-Fund Theorem states that any portfolio on the minimum-variance frontier can be constructed as a <strong>combination</strong> of any two portfolios also on that frontier. Thus, to find the Minimum Variance (MVP), we can make a <strong>linear combination</strong>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Define the expected returns of P1 and P2</span>
+<span class="n">mu_P1</span> <span class="o">=</span> <span class="n">optimal_weights_P1</span> <span class="o">@</span> <span class="n">mu</span>
+<span class="n">mu_P2</span> <span class="o">=</span> <span class="n">optimal_weights_P2</span> <span class="o">@</span> <span class="n">mu</span>
+
+<span class="c1"># Define the target return for the new portfolio</span>
+<span class="n">target_return_new</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># 4%</span>
+
+<span class="c1"># Calculate the weights for the combination of P1 and P2 to achieve the target return</span>
+<span class="c1"># Using the formula alpha = (mu_P2 - target_return_new) / (mu_P2 - mu_P1)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="n">mu_P2</span> <span class="o">-</span> <span class="n">target_return_new</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">mu_P2</span> <span class="o">-</span> <span class="n">mu_P1</span><span class="p">)</span>
+
+<span class="c1"># Validate alpha is within reasonable bounds (0 &lt;= alpha &lt;= 1)</span>
+<span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">alpha</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="c1"># Compute the new portfolio's weights as a linear combination of P1 and P2</span>
+    <span class="n">new_portfolio_weights</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">optimal_weights_P1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">optimal_weights_P2</span>
+    
+    <span class="c1"># Calculate the variance of the new portfolio</span>
+    <span class="n">new_portfolio_variance</span> <span class="o">=</span> <span class="n">new_portfolio_weights</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="n">new_portfolio_weights</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Alpha for combining P1 and P2:"</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Weights of the new minimum variance portfolio with target return 4%:"</span><span class="p">,</span> <span class="n">new_portfolio_weights</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Variance of the new portfolio:"</span><span class="p">,</span> <span class="n">new_portfolio_variance</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"No feasible solution: alpha out of bounds. Check the target return or input portfolios."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Alpha for combining P1 and P2: 0.9025270758226638
+Weights of the new minimum variance portfolio with target return 4%: [0.92491247 0.06050952 0.01457801]
+Variance of the new portfolio: 0.008855280043488664
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </main>
 </body>
 </html>
