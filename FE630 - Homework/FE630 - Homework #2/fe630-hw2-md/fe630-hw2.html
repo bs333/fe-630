@@ -7533,7 +7533,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="P1---Optimization-w/Equality-Constraints-(40-pts)">P1 - Optimization w/Equality Constraints (40 pts)<a class="anchor-link" href="#P1---Optimization-w/Equality-Constraints-(40-pts)">¶</a></h3>
+<h3 id="Q1---Optimization-w/Equality-Constraints-(40-pts)">Q1 - Optimization w/Equality Constraints (40 pts)<a class="anchor-link" href="#Q1---Optimization-w/Equality-Constraints-(40-pts)">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7584,121 +7584,36 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="1.-Lagrangian-Solution">1. Lagrangian Solution<a class="anchor-link" href="#1.-Lagrangian-Solution">¶</a></h4>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Problem-Formulation">Problem Formulation<a class="anchor-link" href="#Problem-Formulation">¶</a></h5><p>The given optimization problem is:</p>
+<h4 id="1.1-Analytical-Solution-to-the-Optimization-Problem">1.1 Analytical Solution to the Optimization Problem<a class="anchor-link" href="#1.1-Analytical-Solution-to-the-Optimization-Problem">¶</a></h4><h5 id="Problem-Formulation">Problem Formulation<a class="anchor-link" href="#Problem-Formulation">¶</a></h5><p>We aim to maximize the following objective function:</p>
 <p>$$
 \begin{cases}
-\underset{x_1, x_2}{\max} &amp; 5 - x_1^2 - x_1x_2 - 3x_2^2 \tag{2}
+\underset{x_1, x_2}{\max} &amp; 5 - x_1^2 - x_1x_2 - 3x_2^2 \tag{3}
 \\
 \text{s.t.} &amp; x_1, x_2 \geq 0
 \\
 &amp; x_1 x_2 \geq 2
 \end{cases}
 $$</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Lagrangian-Formulation">Lagrangian Formulation<a class="anchor-link" href="#Lagrangian-Formulation">¶</a></h5><p>The Lagrangian $\mathcal{L}$ for this problem includes the objective function and the constraints incorporated through Lagrange multipliers:</p>
+<p>We denote the solution (the <em><strong>optimal solution</strong></em>) by $\omega^*(\sigma_T)$ where $\sigma_T$ represents the parameters under consideration, and the <em><strong>optimal value</strong></em> of the problem by $R_p(\omega_1^*(\sigma_T), \omega_2^*(\sigma_T))$ which is simplified to $R_p(\sigma_T)$.</p>
+<h5 id="Lagrangian-Formulation">Lagrangian Formulation<a class="anchor-link" href="#Lagrangian-Formulation">¶</a></h5><p>Construct the Lagrangian to incorporate the constraints with the Lagrange multiplier $\lambda$:</p>
 <p>$$
-\mathcal{L}(x_1, x_2, \lambda_1, \lambda_2, \lambda_3) = 5 - x_1^2 - x_1x_2 - 3x_2^2 + \lambda_1 x_1 + \lambda_2 x_2 + \lambda_3 (x_1 x_2 - 2) \tag{3}
+\mathcal{L}(x_1, x_2, \lambda) = 5 - x_1^2 - x_1x_2 - 3x_2^2 + \lambda (x_1 x_2 - 2)
 $$</p>
-<p>Here, $\lambda_1$, $\lambda_2$, and $\lambda_3$ are the Lagrange multipliers.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Lagrangian-Partial-Derivatives">Lagrangian Partial Derivatives<a class="anchor-link" href="#Lagrangian-Partial-Derivatives">¶</a></h5><p>To find the stationary points, we take the partial derivatives of $\mathcal{L}$ and set them to zero:</p>
+<h5 id="Conditions-for-Stationarity">Conditions for Stationarity<a class="anchor-link" href="#Conditions-for-Stationarity">¶</a></h5><p>To find the extremum, we calculate the partial derivatives of $\mathcal{L}$:</p>
 <p>$$
-\frac{\partial \mathcal{L}}{\partial x_1} = -2x_1 - x_2 + \lambda_1 + \lambda_3 x_2 = 0 \tag{4}
+\frac{\partial \mathcal{L}}{\partial x_1} = -2x_1 - x_2 + \lambda x_2 = 0 \tag{1}
 $$
 $$
-\frac{\partial \mathcal{L}}{\partial x_2} = -x_1 - 6x_2 + \lambda_2 + \lambda_3 x_1 = 0 \tag{5}
+\frac{\partial \mathcal{L}}{\partial x_2} = -x_1 - 6x_2 + \lambda x_1 = 0 \tag{2}
 $$</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Complementary-Slackness">Complementary Slackness<a class="anchor-link" href="#Complementary-Slackness">¶</a></h5><p>KKT conditions also include complementary slackness:</p>
+<h5 id="Solving-the-Equations">Solving the Equations<a class="anchor-link" href="#Solving-the-Equations">¶</a></h5><p>Equating and solving the derived equations for $x_1$ and $x_2$, and incorporating the constraints, will give us $\omega^*(\sigma_T) = (\omega_1^*(\sigma_T), \omega_2^*(\sigma_T))$. This involves solving:</p>
 <p>$$
-\lambda_1 x_1 = 0, \quad \lambda_2 x_2 = 0, \quad \lambda_3 (x_1 x_2 - 2) = 0 \tag{6}
+2x_1^2 - 5x_1x_2 - x_2^2 = 0 \tag{5}
 $$</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Solve-the-System-of-Equations">Solve the System of Equations<a class="anchor-link" href="#Solve-the-System-of-Equations">¶</a></h5><p>We consider different cases based on the KKT conditions:</p>
-<ol>
-<li><strong>Case 1: Interior Solution</strong><ul>
-<li>Assume $\lambda_1 = \lambda_2 = \lambda_3 = 0$.</li>
-<li>Solve equations (4) and (5) directly.</li>
-</ul>
-</li>
-<li><strong>Case 2: Boundary Solution</strong><ul>
-<li>Assume $x_1 &gt; 0, x_2 &gt; 0$, and $x_1 x_2 = 2$.</li>
-<li>Substitute $x_1 = \frac{2}{x_2}$ into the equations and solve.</li>
-</ul>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Analytical-Solution">Analytical Solution<a class="anchor-link" href="#Analytical-Solution">¶</a></h5><p><strong>Case 1</strong>: Assume $\lambda_1 = \lambda_2 = \lambda_3 = 0$.</p>
-<p>Plugging in $\lambda_1 = \lambda_2 = \lambda_3 = 0$ simplifies equations (4) and (5):</p>
+<h5 id="Optimal-Solution-and-Value">Optimal Solution and Value<a class="anchor-link" href="#Optimal-Solution-and-Value">¶</a></h5><p>Upon solving the equations and checking the feasibility with respect to the constraints, we can find the values of $\omega_1^*(\sigma_T)$ and $\omega_2^*(\sigma_T)$. Substituting these values into the original objective function gives us $R_p(\sigma_T)$, the maximum value of the function:</p>
 <p>$$
--2x_1 - x_2 = 0 \implies x_2 = -2x_1 \quad \text{(not possible since $x_2 \geq 0$)} \tag{7}
+R_p(\sigma_T) = 5 - (\omega_1^*(\sigma_T))^2 - \omega_1^*(\sigma_T) \omega_2^*(\sigma_T) - 3(\omega_2^*(\sigma_T))^2
 $$</p>
-<p><strong>Case 2</strong>: Boundary Solution with $x_1 x_2 = 2$</p>
-<p>Substitute $x_1 = \frac{2}{x_2}$ into equations (4) and (5) and solve:</p>
-<p>$$
--2\left(\frac{2}{x_2}\right) - x_2 + \lambda_3 x_2 = 0 \quad \text{and} \quad -\frac{2}{x_2} - 6x_2 + \lambda_3 \frac{2}{x_2} = 0 \tag{8}
-$$</p>
-<p>Solving these equations:</p>
-<ol>
-<li>From equation (4): $\lambda_3 x_2 = 4/x_2 + x_2$</li>
-<li>Substitute $\lambda_3 x_2$ from equation (4) into equation (5), and solve for $x_2$. This could yield $x_2 = \sqrt{2}$, which when substituted back gives $x_1 = \sqrt{2}$, hence $x_1 x_2 = 2$.</li>
-</ol>
 </div>
 </div>
 </div>
@@ -7709,55 +7624,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Conclusion-P1">Conclusion P1<a class="anchor-link" href="#Conclusion-P1">¶</a></h5><p>Analytical solutions indicate that at $x_1 = x_2 = \sqrt{2}$, the constraints are satisfied, and from the substitution into the objective function, we can evaluate the maximum value.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Optimal-Solution">Optimal Solution<a class="anchor-link" href="#Optimal-Solution">¶</a></h5><p>The optimal solution, denoted by $\omega^*(\sigma_T)$, for the given problem under the constraints and specified conditions is:</p>
-<p>$$
-\omega_1^*(\sigma_T) = \sqrt{2}, \quad \omega_2^*(\sigma_T) = \sqrt{2}
-$$</p>
-<p>This solution satisfies the constraint $x_1 x_2 \geq 2$ with $x_1 x_2 = 2$.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Optimal-Value">Optimal Value<a class="anchor-link" href="#Optimal-Value">¶</a></h5><p>The optimal value of the problem, denoted by $R_p(\sigma_T)$, is calculated by evaluating the objective function at the optimal solution points $\omega_1^*(\sigma_T)$ and $\omega_2^*(\sigma_T)$. The calculation is as follows:</p>
-<p>$$
-R_p(\sigma_T) = R_p(\omega_1^*(\sigma_T), \omega_2^*(\sigma_T)) = f(\sqrt{2}, \sqrt{2})
-$$
-$$
-= 5 - (\sqrt{2})^2 - \sqrt{2} \times \sqrt{2} - 3(\sqrt{2})^2
-$$
-$$
-= -5
-$$</p>
-<p>Thus, the optimal value of the objective function, given the constraints and the formulation of the problem, is $R_p(\sigma_T) = -5$.</p>
-<p>This value represents the maximum return achievable under the given constraints and is obtained at the solution where both $x_1$ and $x_2$ are $\sqrt{2}$.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="2.-Efficient-Frontier-Mapping">2. Efficient Frontier Mapping<a class="anchor-link" href="#2.-Efficient-Frontier-Mapping">¶</a></h4>
+<h4 id="1.2-Efficient-Frontier-Mapping">1.2 Efficient Frontier Mapping<a class="anchor-link" href="#1.2-Efficient-Frontier-Mapping">¶</a></h4>
 </div>
 </div>
 </div>
@@ -7997,7 +7864,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Optimization-w/Inequality-Constraints-(20-pts)">Optimization w/Inequality Constraints (20 pts)<a class="anchor-link" href="#Optimization-w/Inequality-Constraints-(20-pts)">¶</a></h4>
+<h4 id="Q2---Optimization-w/Inequality-Constraints-(20-pts)">Q2 - Optimization w/Inequality Constraints (20 pts)<a class="anchor-link" href="#Q2---Optimization-w/Inequality-Constraints-(20-pts)">¶</a></h4>
 </div>
 </div>
 </div>
@@ -8028,6 +7895,150 @@ $$</p>
 \end{cases}
 $$</p>
 <p>and use an optimizer to verify your answer.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="c1"># Objective function</span>
+<span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x1</span><span class="o">*</span><span class="n">x2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Negative because we are maximizing</span>
+
+<span class="c1"># Constraint functions</span>
+<span class="k">def</span> <span class="nf">constraint1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span>
+
+<span class="c1"># Initial guesses</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Define constraints and bounds</span>
+<span class="n">cons</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'ineq'</span><span class="p">,</span> <span class="s1">'fun'</span><span class="p">:</span> <span class="n">constraint1</span><span class="p">}]</span>
+<span class="n">bnds</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
+
+<span class="c1"># Use 'SLSQP' method for solving the optimization problem</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">'SLSQP'</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bnds</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">cons</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Optimal values:'</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Maximum value of the function:'</span><span class="p">,</span> <span class="o">-</span><span class="n">sol</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Optimal values: [1.86120971 1.07456993]
+Maximum value of the function: -3.928203232982734
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Define the symbols</span>
+<span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">'x1 x2'</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nonnegative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Equation derived from equating the lambda expressions</span>
+<span class="n">equation</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">x1</span><span class="o">*</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x2</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Solve the equation</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">),</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Solutions from sympy:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">solution</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Solutions from sympy:
+{x1: x2*(5 - sqrt(33))/4}
+{x1: x2*(5 + sqrt(33))/4}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="c1"># Objective function (negative because we are using a minimizer)</span>
+<span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Constraint functions</span>
+<span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'ineq'</span><span class="p">,</span> <span class="s1">'fun'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="p">},</span>  <span class="c1"># x1 * x2 &gt;= 2</span>
+    <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'ineq'</span><span class="p">,</span> <span class="s1">'fun'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]},</span>              <span class="c1"># x1 &gt;= 0</span>
+    <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'ineq'</span><span class="p">,</span> <span class="s1">'fun'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>               <span class="c1"># x2 &gt;= 0</span>
+<span class="p">]</span>
+
+<span class="c1"># Initial guess</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Use 'SLSQP' method for solving the optimization problem</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">'SLSQP'</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Optimization Results from scipy.optimize:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Optimal values:"</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Maximum value of the function:"</span><span class="p">,</span> <span class="o">-</span><span class="n">result</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>
+Optimization Results from scipy.optimize:
+Optimal values: [1.86120972 1.07456993]
+Maximum value of the function: -3.9282032329598344
+</pre>
+</div>
 </div>
 </div>
 </div>
