@@ -7533,7 +7533,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="P1---Optimization-w/Equality-Constraints-(40-pts)">P1 - Optimization w/Equality Constraints (40 pts)<a class="anchor-link" href="#P1---Optimization-w/Equality-Constraints-(40-pts)">¶</a></h4>
+<h3 id="P1---Optimization-w/Equality-Constraints-(40-pts)">P1 - Optimization w/Equality Constraints (40 pts)<a class="anchor-link" href="#P1---Optimization-w/Equality-Constraints-(40-pts)">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7584,7 +7584,85 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h5 id="Efficient-Frontier-Mapping">Efficient Frontier Mapping<a class="anchor-link" href="#Efficient-Frontier-Mapping">¶</a></h5>
+<h4 id="1.-Lagrangian-Solution">1. Lagrangian Solution<a class="anchor-link" href="#1.-Lagrangian-Solution">¶</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Problem-Formulation">Problem Formulation<a class="anchor-link" href="#Problem-Formulation">¶</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The given optimization problem is:</p>
+<p>$$
+\begin{cases}
+\underset{x_1, x_2}{\max} &amp; 5 - x_1^2 - x_1x_2 - 3x_2^2 \tag{3}
+\\
+\text{s.t.} &amp; x_1, x_2 \geq 0
+\\
+&amp; x_1 x_2 \geq 2
+\end{cases}
+$$</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="Lagrangian-Formulation">Lagrangian Formulation<a class="anchor-link" href="#Lagrangian-Formulation">¶</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The Lagrangian $\mathcal{L}$ for this problem includes the objective function and the constraints incorporated through Lagrange multipliers:</p>
+<p>$$
+\mathcal{L}(x_1, x_2, \lambda_1, \lambda_2, \lambda_3) = 5 - x_1^2 - x_1x_2 - 3x_2^2 + \lambda_1 x_1 + \lambda_2 x_2 + \lambda_3 (x_1 x_2 - 2)
+$$</p>
+<p>Here, $\lambda_1$, $\lambda_2$, and $\lambda_3$ are the Lagrange multipliers.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="2.-Efficient-Frontier-Mapping">2. Efficient Frontier Mapping<a class="anchor-link" href="#2.-Efficient-Frontier-Mapping">¶</a></h4>
 </div>
 </div>
 </div>
