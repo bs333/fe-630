@@ -7564,7 +7564,7 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <ol>
-<li><p>Solve the <em>problem (3)</em> using a <strong>Lagrangian approach</strong>. You will denote the solution (the <em><strong>optimal solution</strong></em>) by $\omega^*(\sigma_T)$ and the <em><strong>optimal value</strong></em> of the problem by $R_p(\omega_1^*(\sigma_T), \omega_2^*(\sigma_T))$ by $R_p(\sigma_T)$.</p>
+<li><p>Solve the <em>problem (9)</em> using a <strong>Lagrangian approach</strong>. You will denote the solution (the <em><strong>optimal solution</strong></em>) by $\omega^*(\sigma_T)$ and the <em><strong>optimal value</strong></em> of the problem by $R_p(\omega_1^*(\sigma_T), \omega_2^*(\sigma_T))$ by $R_p(\sigma_T)$.</p>
 </li>
 <li><p>Assume that $\mu_1 = 5\%$, $\mu_2 = 10\%$, $\sigma_1 = 10\%$, $\sigma_2 = 20\%$, and $\rho_{1,2} = -0.5$ (moderate negative correlation).</p>
 </li>
@@ -7864,7 +7864,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Q2---Optimization-w/Inequality-Constraints-(20-pts)">Q2 - Optimization w/Inequality Constraints (20 pts)<a class="anchor-link" href="#Q2---Optimization-w/Inequality-Constraints-(20-pts)">¶</a></h4>
+<h3 id="Q2---Optimization-w/Inequality-Constraints-(20-pts)">Q2 - Optimization w/Inequality Constraints (20 pts)<a class="anchor-link" href="#Q2---Optimization-w/Inequality-Constraints-(20-pts)">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7878,7 +7878,7 @@ $$</p>
 <p>Solve analytically (at least) one of the two following problems:</p>
 <p>$$
 \begin{cases}
-\underset{x_1, x_2} \max &amp; (x_1 - 2)^2 + 2(x_2 - 1)^2 \tag{2}
+\underset{x_1, x_2} \min &amp; (x_1 - 2)^2 + 2(x_2 - 1)^2 \tag{8}
 \\
 \text{s.t} &amp; x_1 + 4x_2 \leq 3
 \\
@@ -7887,7 +7887,7 @@ $$</p>
 $$</p>
 <p>$$
 \begin{cases}
-\underset{x_1, x_2} \max &amp; 5 - x_1^2 - x_1x_2 - 3x_2^2 \tag{3}
+\underset{x_1, x_2} \max &amp; 5 - x_1^2 - x_1x_2 - 3x_2^2 \tag{9}
 \\
 \text{s.t} &amp; x_1, x_2 \geq 0
 \\
@@ -7895,6 +7895,77 @@ $$</p>
 \end{cases}
 $$</p>
 <p>and use an optimizer to verify your answer.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Problem-Formulation">Problem Formulation<a class="anchor-link" href="#Problem-Formulation">¶</a></h4><p>We are given the optimization problem:</p>
+<p>$$
+\begin{cases}
+\underset{x_1, x_2} \min &amp; (x_1 - 2)^2 + 2(x_2 - 1)^2 \tag{8}
+\\
+\text{s.t} &amp; x_1 + 4x_2 \leq 3
+\\
+&amp; x_1 \geq x_2
+\end{cases}
+$$</p>
+<p>The goal is to find $(x_1, x_2)$ that minimizes the objective function subject to the given constraints.</p>
+<h4 id="Lagrangian-Formulation">Lagrangian Formulation<a class="anchor-link" href="#Lagrangian-Formulation">¶</a></h4><p>Construct the Lagrangian to incorporate the constraints with Lagrange multipliers $\lambda_1$ and $\lambda_2$:</p>
+<p>$$
+\mathcal{L}(x_1, x_2, \lambda_1, \lambda_2) = (x_1 - 2)^2 + 2(x_2 - 1)^2 + \lambda_1 (x_1 + 4x_2 - 3) + \lambda_2 (x_2 - x_1)
+$$</p>
+<h4 id="Conditions-for-Stationarity">Conditions for Stationarity<a class="anchor-link" href="#Conditions-for-Stationarity">¶</a></h4><p>Calculate the partial derivatives of the Lagrangian with respect to $x_1$ and $x_2$, and set them to zero:</p>
+<p>$$
+\frac{\partial \mathcal{L}}{\partial x_1} = 2(x_1 - 2) + \lambda_1 - \lambda_2 = 0 \tag{1}
+$$
+$$
+\frac{\partial \mathcal{L}}{\partial x_2} = 4(x_2 - 1) + 4\lambda_1 + \lambda_2 = 0 \tag{2}
+$$</p>
+<h4 id="Solving-System-of-Equations">Solving System of Equations<a class="anchor-link" href="#Solving-System-of-Equations">¶</a></h4><p>Here are the following solution sets (done on paper):</p>
+<ol>
+<li><p><strong>First Solution Set:</strong></p>
+<ul>
+<li>$\lambda = \frac{22}{25}$</li>
+<li>$x_1 = -\frac{3}{5}$</li>
+<li>$x_2 = -\frac{3}{5}$</li>
+<li>$\lambda_2 = -\frac{48}{25}$</li>
+<li>This solution is <strong>not feasible</strong> because both $x_1$ and $x_2$ are negative, violating the non-negativity constraints.</li>
+</ul>
+</li>
+<li><p><strong>Second Solution Set:</strong></p>
+<ul>
+<li>$\lambda_1 = 0$</li>
+<li>$x_1 = -\frac{4}{3}$</li>
+<li>$x_2 = -\frac{4}{3}$</li>
+<li>$\lambda_2 = -\frac{4}{3}$</li>
+<li>This solution is also <strong>not feasible</strong> due to negative values for $x_1$ and $x_2$.</li>
+</ul>
+</li>
+<li><p><strong>Third Solution Set:</strong></p>
+<ul>
+<li>$\lambda_1 = 0$</li>
+<li>$x_1 = 2$</li>
+<li>$x_2 = 1$</li>
+<li>$\lambda_2 = 0$</li>
+<li>This solution is <strong>feasible</strong> as it satisfies all constraints.</li>
+</ul>
+</li>
+<li><p><strong>Fourth Solution Set:</strong></p>
+<ul>
+<li>$\lambda_1 = \frac{2}{3}$</li>
+<li>$x_1 = \frac{5}{3}$</li>
+<li>$x_2 = \frac{1}{3}$</li>
+<li>$\lambda_2 = 0$</li>
+<li>This solution appears <strong>feasible</strong> and adheres to the constraint $x_1 + 4x_2 \leq 3$.</li>
+</ul>
+</li>
+</ol>
 </div>
 </div>
 </div>
