@@ -8018,6 +8018,134 @@ Objective value for Fourth Solution Set: 1.0000000000000002
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Q3---Mean-Variance-Optimization-(40-pts)">Q3 - Mean-Variance Optimization (40 pts)<a class="anchor-link" href="#Q3---Mean-Variance-Optimization-(40-pts)">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Consider an Investment Universe made of 3 stocks $S_1, S_2,$ &amp; $S_3$ with the following characteristics:</p>
+<ul>
+<li><p>Covariance Matrix: $\bm{\Sigma} = 
+\begin{pmatrix}
+0.010 &amp; 0.002 &amp; 0.001 \\
+0.002 &amp; 0.011 &amp; 0.003 \\
+0.001 &amp; 0.003 &amp; 0.020 \\
+\end{pmatrix};$</p>
+</li>
+<li><p>Expected Return Vector: $\bm{\mu} = \begin{pmatrix}
+\mu_1 \\
+\mu_2 \\ 
+\mu_3 \\
+\end{pmatrix} = \begin{pmatrix}
+4.27\% \\
+0.15\% \\
+2.85\%
+\end{pmatrix}$</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="3.1-Find-the-Global-Minimal-Variance-Portfolio.-(5-pts)">3.1 Find the Global Minimal Variance Portfolio. (5 pts)<a class="anchor-link" href="#3.1-Find-the-Global-Minimal-Variance-Portfolio.-(5-pts)">¶</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h5 id="GMVP-Construction">GMVP Construction<a class="anchor-link" href="#GMVP-Construction">¶</a></h5><p>The goal is to find the portfolio weights that <strong>minimize</strong> the <em>portfolio's variance</em> $(\sigma_P)$, subject to the weights summing to 1.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="c1"># Define the covariance matrix</span>
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">0.010</span><span class="p">,</span> <span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.011</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mf">0.020</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="c1"># Objective function: Portfolio Variance</span>
+<span class="k">def</span> <span class="nf">portfolio_variance</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">covariance_matrix</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">weights</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">covariance_matrix</span> <span class="o">@</span> <span class="n">weights</span>
+
+<span class="c1"># Constraint: Weights must sum to 1</span>
+<span class="k">def</span> <span class="nf">check_sum</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="c1"># Constraint dictionary</span>
+<span class="n">cons</span> <span class="o">=</span> <span class="p">({</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'eq'</span><span class="p">,</span> <span class="s1">'fun'</span><span class="p">:</span> <span class="n">check_sum</span><span class="p">})</span>
+
+<span class="c1"># Initial guess for weights</span>
+<span class="n">initial_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>
+
+<span class="c1"># Bounds for weights</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Minimize the portfolio variance</span>
+<span class="n">opt_results</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">portfolio_variance</span><span class="p">,</span> <span class="n">initial_weights</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">Sigma</span><span class="p">,),</span> <span class="n">method</span><span class="o">=</span><span class="s1">'SLSQP'</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">cons</span><span class="p">)</span>
+
+<span class="c1"># Print the optimal weights</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Optimal weights for the Global Minimum Variance Portfolio:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">opt_results</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Calculate the minimal variance</span>
+<span class="n">min_var</span> <span class="o">=</span> <span class="n">portfolio_variance</span><span class="p">(</span><span class="n">opt_results</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Minimum Variance of the Portfolio:"</span><span class="p">,</span> <span class="n">min_var</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Optimal weights for the Global Minimum Variance Portfolio:
+[0.43878636 0.37007632 0.19113732]
+Minimum Variance of the Portfolio: 0.005404212545913877
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </main>
 </body>
 </html>
