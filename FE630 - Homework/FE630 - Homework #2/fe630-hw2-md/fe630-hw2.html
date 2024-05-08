@@ -7932,19 +7932,19 @@ $$</p>
 <li><p><strong>First Solution Set:</strong></p>
 <ul>
 <li>$\lambda = \frac{22}{25}$</li>
-<li>$x_1 = -\frac{3}{5}$</li>
-<li>$x_2 = -\frac{3}{5}$</li>
+<li>$x_1 = \frac{3}{5}$</li>
+<li>$x_2 = \frac{3}{5}$</li>
 <li>$\lambda_2 = -\frac{48}{25}$</li>
-<li>This solution is <strong>not feasible</strong> because both $x_1$ and $x_2$ are negative, violating the non-negativity constraints.</li>
+<li>This solution is <strong>feasible</strong> since it satisfies all constraints.</li>
 </ul>
 </li>
 <li><p><strong>Second Solution Set:</strong></p>
 <ul>
 <li>$\lambda_1 = 0$</li>
-<li>$x_1 = -\frac{4}{3}$</li>
-<li>$x_2 = -\frac{4}{3}$</li>
+<li>$x_1 = \frac{4}{3}$</li>
+<li>$x_2 = \frac{4}{3}$</li>
 <li>$\lambda_2 = -\frac{4}{3}$</li>
-<li>This solution is also <strong>not feasible</strong> due to negative values for $x_1$ and $x_2$.</li>
+<li>This solution is <strong>not feasible</strong> since it fails $x_1 + 4x_2 \leq 3$ $(6.67)$.</li>
 </ul>
 </li>
 <li><p><strong>Third Solution Set:</strong></p>
@@ -7953,7 +7953,7 @@ $$</p>
 <li>$x_1 = 2$</li>
 <li>$x_2 = 1$</li>
 <li>$\lambda_2 = 0$</li>
-<li>This solution is <strong>feasible</strong> as it satisfies all constraints.</li>
+<li>This solution is not <strong>feasible</strong> since it fails $x_1 + 4x_2 \leq 3$ $(6)$.</li>
 </ul>
 </li>
 <li><p><strong>Fourth Solution Set:</strong></p>
@@ -7962,7 +7962,7 @@ $$</p>
 <li>$x_1 = \frac{5}{3}$</li>
 <li>$x_2 = \frac{1}{3}$</li>
 <li>$\lambda_2 = 0$</li>
-<li>This solution appears <strong>feasible</strong> and adheres to the constraint $x_1 + 4x_2 \leq 3$.</li>
+<li>This solution is <strong>feasible</strong> since it satisfies all constraints.</li>
 </ul>
 </li>
 </ol>
@@ -7977,30 +7977,16 @@ $$</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">objective_function</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="c1"># Objective function</span>
-<span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span>
-    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x1</span><span class="o">*</span><span class="n">x2</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Negative because we are maximizing</span>
+<span class="c1"># Third Solution Set</span>
+<span class="n">value_3</span> <span class="o">=</span> <span class="n">objective_function</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># Fourth Solution Set</span>
+<span class="n">value_4</span> <span class="o">=</span> <span class="n">objective_function</span><span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
 
-<span class="c1"># Constraint functions</span>
-<span class="k">def</span> <span class="nf">constraint1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span>
-
-<span class="c1"># Initial guesses</span>
-<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-
-<span class="c1"># Define constraints and bounds</span>
-<span class="n">cons</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'ineq'</span><span class="p">,</span> <span class="s1">'fun'</span><span class="p">:</span> <span class="n">constraint1</span><span class="p">}]</span>
-<span class="n">bnds</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
-
-<span class="c1"># Use 'SLSQP' method for solving the optimization problem</span>
-<span class="n">sol</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">'SLSQP'</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bnds</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">cons</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Optimal values:'</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Maximum value of the function:'</span><span class="p">,</span> <span class="o">-</span><span class="n">sol</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Objective value for Third Solution Set:"</span><span class="p">,</span> <span class="n">value_3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Objective value for Fourth Solution Set:"</span><span class="p">,</span> <span class="n">value_4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8013,103 +7999,21 @@ $$</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Optimal values: [1.86120971 1.07456993]
-Maximum value of the function: -3.928203232982734
+<pre>Objective value for Third Solution Set: 2.28
+Objective value for Fourth Solution Set: 1.0000000000000002
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
-
-<span class="c1"># Define the symbols</span>
-<span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">'x1 x2'</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nonnegative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Equation derived from equating the lambda expressions</span>
-<span class="n">equation</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">x1</span><span class="o">*</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x2</span><span class="o">**</span><span class="mi">2</span>
-
-<span class="c1"># Solve the equation</span>
-<span class="n">solution</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">),</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Solutions from sympy:"</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">solution</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Solutions from sympy:
-{x1: x2*(5 - sqrt(33))/4}
-{x1: x2*(5 + sqrt(33))/4}
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
-
-<span class="c1"># Objective function (negative because we are using a minimizer)</span>
-<span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="c1"># Constraint functions</span>
-<span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'ineq'</span><span class="p">,</span> <span class="s1">'fun'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="p">},</span>  <span class="c1"># x1 * x2 &gt;= 2</span>
-    <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'ineq'</span><span class="p">,</span> <span class="s1">'fun'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]},</span>              <span class="c1"># x1 &gt;= 0</span>
-    <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'ineq'</span><span class="p">,</span> <span class="s1">'fun'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>               <span class="c1"># x2 &gt;= 0</span>
-<span class="p">]</span>
-
-<span class="c1"># Initial guess</span>
-<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-
-<span class="c1"># Use 'SLSQP' method for solving the optimization problem</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">'SLSQP'</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Optimization Results from scipy.optimize:"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Optimal values:"</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Maximum value of the function:"</span><span class="p">,</span> <span class="o">-</span><span class="n">result</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>
-Optimization Results from scipy.optimize:
-Optimal values: [1.86120972 1.07456993]
-Maximum value of the function: -3.9282032329598344
-</pre>
-</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Final-Answer">Final Answer<a class="anchor-link" href="#Final-Answer">¶</a></h4><p>Since it's looking for a <strong>minima</strong>, the answer is the set $(x_1 = 5/3, x_2 = 1/3)^\intercal$ as that yields $1$ (arithmetic done on paper &amp; confirmed via optimizer).</p>
 </div>
 </div>
 </div>
