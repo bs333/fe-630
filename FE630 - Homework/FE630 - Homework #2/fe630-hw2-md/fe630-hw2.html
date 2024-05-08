@@ -7587,7 +7587,7 @@ $$</p>
 <h4 id="1.1-Analytical-Solution-to-the-Optimization-Problem">1.1 Analytical Solution to the Optimization Problem<a class="anchor-link" href="#1.1-Analytical-Solution-to-the-Optimization-Problem">¶</a></h4><h5 id="Problem-Formulation">Problem Formulation<a class="anchor-link" href="#Problem-Formulation">¶</a></h5><p>We aim to maximize the following objective function:</p>
 <p>$$
 \begin{cases}
-\underset{x_1, x_2}{\max} &amp; 5 - x_1^2 - x_1x_2 - 3x_2^2 \tag{3}
+\underset{x_1, x_2}{\max} &amp; 5 - x_1^2 - x_1x_2 - 3x_2^2 \tag{2}
 \\
 \text{s.t.} &amp; x_1, x_2 \geq 0
 \\
@@ -7597,22 +7597,22 @@ $$</p>
 <p>We denote the solution (the <em><strong>optimal solution</strong></em>) by $\omega^*(\sigma_T)$ where $\sigma_T$ represents the parameters under consideration, and the <em><strong>optimal value</strong></em> of the problem by $R_p(\omega_1^*(\sigma_T), \omega_2^*(\sigma_T))$ which is simplified to $R_p(\sigma_T)$.</p>
 <h5 id="Lagrangian-Formulation">Lagrangian Formulation<a class="anchor-link" href="#Lagrangian-Formulation">¶</a></h5><p>Construct the Lagrangian to incorporate the constraints with the Lagrange multiplier $\lambda$:</p>
 <p>$$
-\mathcal{L}(x_1, x_2, \lambda) = 5 - x_1^2 - x_1x_2 - 3x_2^2 + \lambda (x_1 x_2 - 2)
+\mathcal{L}(x_1, x_2, \lambda) = 5 - x_1^2 - x_1x_2 - 3x_2^2 + \lambda (x_1 x_2 - 2) \tag{3}
 $$</p>
 <h5 id="Conditions-for-Stationarity">Conditions for Stationarity<a class="anchor-link" href="#Conditions-for-Stationarity">¶</a></h5><p>To find the extremum, we calculate the partial derivatives of $\mathcal{L}$:</p>
 <p>$$
-\frac{\partial \mathcal{L}}{\partial x_1} = -2x_1 - x_2 + \lambda x_2 = 0 \tag{1}
+\frac{\partial \mathcal{L}}{\partial x_1} = -2x_1 - x_2 + \lambda x_2 = 0 \tag{4}
 $$
 $$
-\frac{\partial \mathcal{L}}{\partial x_2} = -x_1 - 6x_2 + \lambda x_1 = 0 \tag{2}
+\frac{\partial \mathcal{L}}{\partial x_2} = -x_1 - 6x_2 + \lambda x_1 = 0 \tag{5}
 $$</p>
 <h5 id="Solving-the-Equations">Solving the Equations<a class="anchor-link" href="#Solving-the-Equations">¶</a></h5><p>Equating and solving the derived equations for $x_1$ and $x_2$, and incorporating the constraints, will give us $\omega^*(\sigma_T) = (\omega_1^*(\sigma_T), \omega_2^*(\sigma_T))$. This involves solving:</p>
 <p>$$
-2x_1^2 - 5x_1x_2 - x_2^2 = 0 \tag{5}
+2x_1^2 - 5x_1x_2 - x_2^2 = 0 \tag{6}
 $$</p>
 <h5 id="Optimal-Solution-and-Value">Optimal Solution and Value<a class="anchor-link" href="#Optimal-Solution-and-Value">¶</a></h5><p>Upon solving the equations and checking the feasibility with respect to the constraints, we can find the values of $\omega_1^*(\sigma_T)$ and $\omega_2^*(\sigma_T)$. Substituting these values into the original objective function gives us $R_p(\sigma_T)$, the maximum value of the function:</p>
 <p>$$
-R_p(\sigma_T) = 5 - (\omega_1^*(\sigma_T))^2 - \omega_1^*(\sigma_T) \omega_2^*(\sigma_T) - 3(\omega_2^*(\sigma_T))^2
+R_p(\sigma_T) = 5 - (\omega_1^*(\sigma_T))^2 - \omega_1^*(\sigma_T) \omega_2^*(\sigma_T) - 3(\omega_2^*(\sigma_T))^2 \tag{7}
 $$</p>
 </div>
 </div>
