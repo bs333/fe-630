@@ -7918,14 +7918,14 @@ $$</p>
 <p>The goal is to find $(x_1, x_2)$ that minimizes the objective function subject to the given constraints.</p>
 <h4 id="Lagrangian-Formulation">Lagrangian Formulation<a class="anchor-link" href="#Lagrangian-Formulation">¶</a></h4><p>Construct the Lagrangian to incorporate the constraints with Lagrange multipliers $\lambda_1$ and $\lambda_2$:</p>
 <p>$$
-\mathcal{L}(x_1, x_2, \lambda_1, \lambda_2) = (x_1 - 2)^2 + 2(x_2 - 1)^2 + \lambda_1 (x_1 + 4x_2 - 3) + \lambda_2 (x_2 - x_1)
+\mathcal{L}(x_1, x_2, \lambda_1, \lambda_2) = (x_1 - 2)^2 + 2(x_2 - 1)^2 + \lambda_1 (x_1 + 4x_2 - 3) + \lambda_2 (x_2 - x_1) \tag{9}
 $$</p>
 <h4 id="Conditions-for-Stationarity">Conditions for Stationarity<a class="anchor-link" href="#Conditions-for-Stationarity">¶</a></h4><p>Calculate the partial derivatives of the Lagrangian with respect to $x_1$ and $x_2$, and set them to zero:</p>
 <p>$$
-\frac{\partial \mathcal{L}}{\partial x_1} = 2(x_1 - 2) + \lambda_1 - \lambda_2 = 0 \tag{1}
+\frac{\partial \mathcal{L}}{\partial x_1} = 2(x_1 - 2) + \lambda_1 - \lambda_2 = 0 \tag{10}
 $$
 $$
-\frac{\partial \mathcal{L}}{\partial x_2} = 4(x_2 - 1) + 4\lambda_1 + \lambda_2 = 0 \tag{2}
+\frac{\partial \mathcal{L}}{\partial x_2} = 4(x_2 - 1) + 4\lambda_1 + \lambda_2 = 0 \tag{11}
 $$</p>
 <h4 id="Solving-System-of-Equations">Solving System of Equations<a class="anchor-link" href="#Solving-System-of-Equations">¶</a></h4><p>Here are the following solution sets (done on paper):</p>
 <ol>
